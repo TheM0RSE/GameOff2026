@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://dcydvs1qdue5e"]
 
-[ext_resource type="Texture2D" uid="uid://ckxs3fsktcc1o" path="res://icon.svg" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Player/Player.tscn" id="1_r150o"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kln2b"]
-albedo_texture = ExtResource("1_idj7w")
+[ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Assets/Models/Table/Table.glb" id="4_rgh2o"]
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 volumetric_fog_enabled = true
@@ -12,7 +9,6 @@ volumetric_fog_enabled = true
 [node name="Node3D" type="Node3D" unique_id=1558236688]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1294509167]
-material_override = SubResource("StandardMaterial3D_kln2b")
 use_collision = true
 size = Vector3(26, 1, 28)
 
@@ -21,3 +17,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026423752, 3.0931816, -0.44
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1741461513]
 environment = SubResource("Environment_3n5wa")
+
+[node name="Table" parent="." unique_id=1948378116 instance=ExtResource("4_rgh2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2193736, 0.49999952, -5.2559977)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=722969662]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.20032477, 4.4667664, -5.5480857)
+light_energy = 16.0
+spot_range = 4.494
+spot_attenuation = 2.03
+spot_angle = 26.54
