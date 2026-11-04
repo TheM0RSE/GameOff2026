@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://brt8f8onm4igd" path="res://Models/Trees/dead_tree_rt_1.glb" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://Models/Trees/tree_rt_4.glb" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Models/Table/Table.glb" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="5_pbw6q"]
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 volumetric_fog_enabled = true
@@ -17,9 +18,6 @@ size = Vector3(26, 1, 28)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1741461513]
 environment = SubResource("Environment_3n5wa")
-
-[node name="Player" parent="." unique_id=1972926718 instance=ExtResource("1_r150o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.83949804, 3.6239471, 1.0171549)
 
 [node name="Lighting" type="Node3D" parent="." unique_id=1582039511]
 
@@ -52,3 +50,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4312272, 0.022335768, -10.
 
 [node name="tree_rt_44" parent="." unique_id=63709885 instance=ExtResource("4_pbw6q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52333677, 0.49999952, -13.155657)
+
+[node name="Glock" parent="." unique_id=1933181250 instance=ExtResource("5_pbw6q")]
+transform = Transform3D(0.18302657, 0.0806305, 3.5244714e-09, 0, -8.742278e-09, 0.2, 0.0806305, -0.18302657, -8.000345e-09, 0.8877673, 1.7368746, -5.3406367)
+
+[node name="Player" parent="." unique_id=1972926718 instance=ExtResource("1_r150o")]
+transform = Transform3D(0.9623565, 0, 0.27179015, 0, 1, 0, -0.27179015, 0, 0.9623565, 0.63244486, 3.736394, -0.85529494)
