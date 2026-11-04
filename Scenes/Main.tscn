@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://dcydvs1qdue5e"]
 
 [ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Player/Player.tscn" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://brt8f8onm4igd" path="res://dead_tree_rt_1.glb" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://tree_rt_4.glb" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Assets/Models/Table/Table.glb" id="4_rgh2o"]
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 volumetric_fog_enabled = true
 volumetric_fog_temporal_reprojection_enabled = false
 
-[node name="Node3D" type="Node3D" unique_id=1558236688]
+[node name="Main" type="Node3D" unique_id=1558236688]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1294509167]
 use_collision = true
@@ -19,12 +21,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026423752, 3.0931816, -0.44
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1741461513]
 environment = SubResource("Environment_3n5wa")
 
-[node name="Table" parent="." unique_id=1948378116 instance=ExtResource("4_rgh2o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2193736, 0.49999952, -5.2559977)
+[node name="Lighting" type="Node3D" parent="." unique_id=1582039511]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=722969662]
+[node name="SpotLight3D" type="SpotLight3D" parent="Lighting" unique_id=722969662]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.20032477, 4.4667664, -5.5480857)
+light_color = Color(1, 1, 0, 1)
 light_energy = 16.0
+shadow_enabled = true
 spot_range = 4.494
 spot_attenuation = 2.03
 spot_angle = 26.54
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting" unique_id=407121697]
+transform = Transform3D(0.8602798, 0.30722022, -0.40685922, -0.13602787, 0.90742916, 0.3975787, 0.49134007, -0.2866847, 0.82243353, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Props" type="Node3D" parent="." unique_id=1579552728]
+
+[node name="Table" parent="Props" unique_id=1948378116 instance=ExtResource("4_rgh2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2193736, 0.49999952, -5.2559977)
+
+[node name="dead_tree_rt_12" parent="Props" unique_id=370425589 instance=ExtResource("3_kln2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1957736, 0.5000005, -7.1150794)
+
+[node name="tree_rt_42" parent="." unique_id=1919560682 instance=ExtResource("4_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3830364, 0.5, -10.146996)
+
+[node name="tree_rt_43" parent="." unique_id=1339597849 instance=ExtResource("4_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4312272, 0.022335768, -10.902896)
+
+[node name="tree_rt_44" parent="." unique_id=63709885 instance=ExtResource("4_pbw6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52333677, 0.49999952, -13.155657)
