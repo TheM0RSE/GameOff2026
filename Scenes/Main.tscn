@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dcydvs1qdue5e"]
 
-[ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Player/Player.tscn" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Entities/Player/Player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://brt8f8onm4igd" path="res://Models/Trees/dead_tree_rt_1.glb" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://Models/Trees/tree_rt_4.glb" id="4_pbw6q"]
-[ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Assets/Models/Table/Table.glb" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Models/Table/Table.glb" id="4_rgh2o"]
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 volumetric_fog_enabled = true
@@ -11,15 +11,15 @@ volumetric_fog_temporal_reprojection_enabled = false
 
 [node name="Main" type="Node3D" unique_id=1558236688]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1294509167]
+[node name="Platform" type="CSGBox3D" parent="." unique_id=1294509167]
 use_collision = true
 size = Vector3(26, 1, 28)
 
-[node name="CharacterBody3D" parent="." unique_id=1972926718 instance=ExtResource("1_r150o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026423752, 3.0931816, -0.44581604)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1741461513]
 environment = SubResource("Environment_3n5wa")
+
+[node name="Player" parent="." unique_id=1972926718 instance=ExtResource("1_r150o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.83949804, 3.6239471, 1.0171549)
 
 [node name="Lighting" type="Node3D" parent="." unique_id=1582039511]
 

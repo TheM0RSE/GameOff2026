@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c2f7or57sbcfm"]
 
-[ext_resource type="Script" uid="uid://c143gwe7hw56k" path="res://Player/Player.gd" id="1_3qydi"]
+[ext_resource type="Script" uid="uid://c143gwe7hw56k" path="res://Entities/Player/Player.gd" id="1_3qydi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_3qydi")
 camera = NodePath("Camera3D")
 
