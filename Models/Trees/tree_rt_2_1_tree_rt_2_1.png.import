@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlpvbuedkv33f"
-path.s3tc="res://.godot/imported/tree_rt_2_1_tree_bark_rt_b_1.png-ae8f1dff709393ce3d9bc58a4fe1c5c2.s3tc.ctex"
+uid="uid://bs0440747ga8m"
+path.s3tc="res://.godot/imported/tree_rt_2_1_tree_rt_2_1.png-d218420882f7d9557d9ef0d5e4ef73f7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "addb49383932171b5c6c398c0b712eb4"
+"md5": "341654b151be2f31129ceded65a48681"
 }
 
 [deps]
 
-source_file="res://Props/Trees/tree_rt_2_1_tree_bark_rt_b_1.png"
-dest_files=["res://.godot/imported/tree_rt_2_1_tree_bark_rt_b_1.png-ae8f1dff709393ce3d9bc58a4fe1c5c2.s3tc.ctex"]
+source_file="res://Models/Trees/tree_rt_2_1_tree_rt_2_1.png"
+dest_files=["res://.godot/imported/tree_rt_2_1_tree_rt_2_1.png-d218420882f7d9557d9ef0d5e4ef73f7.s3tc.ctex"]
 
 [params]
 

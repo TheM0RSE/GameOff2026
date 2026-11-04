@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dcydvs1qdue5e"]
 
 [ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Player/Player.tscn" id="1_r150o"]
-[ext_resource type="PackedScene" uid="uid://brt8f8onm4igd" path="res://Props/Trees/dead_tree_rt_1.glb" id="3_kln2b"]
-[ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://Props/Trees/tree_rt_4.glb" id="4_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://brt8f8onm4igd" path="res://Models/Trees/dead_tree_rt_1.glb" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://Models/Trees/tree_rt_4.glb" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Assets/Models/Table/Table.glb" id="4_rgh2o"]
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
