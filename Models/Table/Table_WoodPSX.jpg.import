@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://161e30m0072h"
-path.s3tc="res://.godot/imported/Table_WoodPSX.jpg-aed26963193c24d493b908913bd96487.s3tc.ctex"
+path.s3tc="res://.godot/imported/Table_WoodPSX.jpg-f832dbdd9949da05487421b29430ba55.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Assets/Models/Table/Table_WoodPSX.jpg"
-dest_files=["res://.godot/imported/Table_WoodPSX.jpg-aed26963193c24d493b908913bd96487.s3tc.ctex"]
+source_file="res://Models/Table/Table_WoodPSX.jpg"
+dest_files=["res://.godot/imported/Table_WoodPSX.jpg-f832dbdd9949da05487421b29430ba55.s3tc.ctex"]
 
 [params]
 
