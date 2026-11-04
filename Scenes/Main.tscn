@@ -7,7 +7,7 @@
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 volumetric_fog_enabled = true
-volumetric_fog_temporal_reprojection_enabled = false
+volumetric_fog_temporal_reprojection_amount = 0.99
 
 [node name="Main" type="Node3D" unique_id=1558236688]
 
@@ -28,9 +28,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.20
 light_color = Color(1, 1, 0, 1)
 light_energy = 16.0
 shadow_enabled = true
-spot_range = 4.494
+spot_range = 4.613599
 spot_attenuation = 2.03
-spot_angle = 59.085926
+spot_angle = 48.258846
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting" unique_id=407121697]
 transform = Transform3D(0.8602798, 0.30722022, -0.40685922, -0.13602787, 0.90742916, 0.3975787, 0.49134007, -0.2866847, 0.82243353, 0, 0, 0)
