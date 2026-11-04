@@ -5,6 +5,7 @@
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 volumetric_fog_enabled = true
+volumetric_fog_temporal_reprojection_enabled = false
 
 [node name="Node3D" type="Node3D" unique_id=1558236688]
 
