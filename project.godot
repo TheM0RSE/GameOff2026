@@ -22,7 +22,6 @@ window/size/viewport_height=270
 window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
 
 [input]
 
@@ -62,6 +61,7 @@ jump={
 
 [physics]
 
+common/physics_jitter_fix=1.0
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 
