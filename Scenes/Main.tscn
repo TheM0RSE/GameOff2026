@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dcydvs1qdue5e"]
 
 [ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Player/Player.tscn" id="1_r150o"]
-[ext_resource type="PackedScene" uid="uid://brt8f8onm4igd" path="res://dead_tree_rt_1.glb" id="3_kln2b"]
-[ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://tree_rt_4.glb" id="4_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://brt8f8onm4igd" path="res://Props/Trees/dead_tree_rt_1.glb" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://Props/Trees/tree_rt_4.glb" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Assets/Models/Table/Table.glb" id="4_rgh2o"]
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
@@ -30,7 +30,7 @@ light_energy = 16.0
 shadow_enabled = true
 spot_range = 4.494
 spot_attenuation = 2.03
-spot_angle = 26.54
+spot_angle = 59.085926
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting" unique_id=407121697]
 transform = Transform3D(0.8602798, 0.30722022, -0.40685922, -0.13602787, 0.90742916, 0.3975787, 0.49134007, -0.2866847, 0.82243353, 0, 0, 0)
