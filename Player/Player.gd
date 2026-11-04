@@ -4,13 +4,32 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 # Mouse & camera variables
-var mouse_sensitivity := 0.2
+var mouse_sensitivity := 0.005
+
+var mouse_input = Vector2.ZERO
 
 @export var camera : Camera3D
 var cam_rotation := Vector2.ZERO
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # Lock mouse ingame
+	
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		# Collect mouse input data
+		mouse_input += event.relative
+	
+func _process(delta: float) -> void:
+	# Apply rotation on every rendered frame
+	rotate_y(-mouse_input.x * mouse_sensitivity)
+	camera.rotate_x(-mouse_input.y * mouse_sensitivity)
+	
+	# Clamp vertical camera angle so you can't look upside down
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+	
+	# Clear the accumulated input so it doesn't carry over to the next frame
+	mouse_input = Vector2.ZERO
+	
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -32,13 +51,3 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		cam_rotation.y -= event.relative.x * mouse_sensitivity
-		cam_rotation.x -= event.relative.y * mouse_sensitivity
-		
-		cam_rotation.x = clamp(cam_rotation.x, -90, 90) # Clamp up and down rotation of camera
-		
-		rotation_degrees.y = cam_rotation.y # Rotate character left and right
-		camera.rotation_degrees.x = cam_rotation.x # Rotate camera up and down
