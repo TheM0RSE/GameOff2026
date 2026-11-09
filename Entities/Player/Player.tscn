@@ -19,8 +19,9 @@ shape = SubResource("CapsuleShape3D_3n5wa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49968207, 0)
 fov = 80.0
 
-[node name="Glock" parent="Camera3D" unique_id=1205406264 instance=ExtResource("2_ww0jn")]
+[node name="Glock" parent="Camera3D" unique_id=1205406264 node_paths=PackedStringArray("camera") instance=ExtResource("2_ww0jn")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.6, -0.4, -0.7)
+camera = NodePath("..")
 
 [node name="Crosshair" type="Control" parent="." unique_id=465566926]
 layout_mode = 3
@@ -37,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Crosshair" unique_id=60384639]
+[node name="Texture" type="TextureRect" parent="Crosshair" unique_id=60384639]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
