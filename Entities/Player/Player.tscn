@@ -1,51 +1,16 @@
 [gd_scene format=3 uid="uid://c2f7or57sbcfm"]
 
 [ext_resource type="Script" uid="uid://c143gwe7hw56k" path="res://Entities/Player/Player.gd" id="1_3qydi"]
-[ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://drswxunfysj57" path="res://Items/Glock/Glock.tscn" id="2_ww0jn"]
+[ext_resource type="Texture2D" uid="uid://q84dn3aohufv" path="res://Entities/Player/Crosshair.png" id="3_vweq0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
 
-[sub_resource type="Animation" id="Animation_ww0jn"]
-resource_name = "Glock_Shoot"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/Glock:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 0.16666667, 0.4),
-"transitions": PackedFloat32Array(0.112656526, 1.1095695, 1),
-"update": 0,
-"values": [Vector3(0, -1.5707964, 0), Vector3(0, -1.5707964, -1.0471976), Vector3(0, -1.5707964, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_vweq0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/Glock:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -1.5707964, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1des2"]
-_data = {
-&"Glock_Shoot": SubResource("Animation_ww0jn"),
-&"RESET": SubResource("Animation_vweq0")
-}
-
-[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("camera", "animation_player")]
+[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("camera", "glock")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_3qydi")
 camera = NodePath("Camera3D")
-animation_player = NodePath("AnimationPlayer")
+glock = NodePath("Camera3D/Glock")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2110840047]
 shape = SubResource("CapsuleShape3D_3n5wa")
@@ -54,8 +19,36 @@ shape = SubResource("CapsuleShape3D_3n5wa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49968207, 0)
 fov = 80.0
 
-[node name="Glock" parent="Camera3D" unique_id=465695505 instance=ExtResource("2_ww0jn")]
-transform = Transform3D(-8.742278e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.742278e-09, 0.6, -0.442, -0.7)
+[node name="Glock" parent="Camera3D" unique_id=1205406264 instance=ExtResource("2_ww0jn")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.6, -0.4, -0.7)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=442258818]
-libraries/ = SubResource("AnimationLibrary_1des2")
+[node name="Crosshair" type="Control" parent="." unique_id=465566926]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Crosshair" unique_id=60384639]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.5
+offset_top = -3.5
+offset_right = 3.5
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vweq0")

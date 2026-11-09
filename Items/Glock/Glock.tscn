@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://drswxunfysj57"]
+
+[ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="1_4qcjk"]
+[ext_resource type="Script" uid="uid://wuc62gwwoqgx" path="res://Items/Glock/GlockScript.gd" id="1_t77gl"]
+[ext_resource type="AudioStream" uid="uid://n41t21edpkgr" path="res://Items/Glock/GlockPow.wav" id="2_t77gl"]
+
+[sub_resource type="Animation" id="Animation_14aeu"]
+resource_name = "Glock_Shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.16666667, 0.36666667),
+"transitions": PackedFloat32Array(0.0824694, 1.2311442, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.3063504), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5idwt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pxitb"]
+_data = {
+&"Glock_Shoot": SubResource("Animation_14aeu"),
+&"RESET": SubResource("Animation_5idwt")
+}
+
+[node name="Glock" type="Node3D" unique_id=1205406264 node_paths=PackedStringArray("shoot_sfx", "animation_player")]
+script = ExtResource("1_t77gl")
+shoot_sfx = NodePath("ShootSFX")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Model" parent="." unique_id=465695505 instance=ExtResource("1_4qcjk")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=367553852]
+stream = ExtResource("2_t77gl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2087245508]
+libraries/ = SubResource("AnimationLibrary_pxitb")

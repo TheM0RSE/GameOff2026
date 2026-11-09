@@ -10,7 +10,7 @@ var mouse_input = Vector2.ZERO
 @export var camera : Camera3D
 var cam_rotation := Vector2.ZERO
 
-@export var animation_player : AnimationPlayer
+@export var glock : Glock
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # Lock mouse ingame
@@ -22,8 +22,7 @@ func _unhandled_input(event):
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
-		animation_player.stop()
-		animation_player.play("Glock_Shoot")
+		glock.shoot()
 	
 	# Apply rotation on every rendered frame
 	rotate_y(-mouse_input.x * mouse_sensitivity)
