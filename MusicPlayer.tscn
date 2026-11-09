@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dnwykitp8g7vs"]
+
+[ext_resource type="AudioStream" uid="uid://boawtgnr1pjy1" path="res://Sounds/Ambient.wav" id="1_1a72i"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" unique_id=1018079355]
+stream = ExtResource("1_1a72i")
+volume_db = -10.0
+autoplay = true
