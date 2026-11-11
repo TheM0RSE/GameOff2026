@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dulq0ckibflvo"]
+
+[ext_resource type="Script" uid="uid://34xxbmqyql2y" path="res://Entities/Customer/Customer.gd" id="1_p0mig"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3n5wa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
+
+[node name="Customer" type="CharacterBody3D" unique_id=1439125245 node_paths=PackedStringArray("nav_agent")]
+script = ExtResource("1_p0mig")
+nav_agent = NodePath("NavigationAgent3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1057250039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_3n5wa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1932769100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_3n5wa")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=595861836]
+path_desired_distance = 0.5
+target_desired_distance = 0.5
+simplify_path = true
+debug_enabled = true
+debug_use_custom = true

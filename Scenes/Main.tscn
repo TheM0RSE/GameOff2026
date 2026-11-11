@@ -5,16 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://dxwxecr2y7xgw" path="res://Models/Trees/tree_rt_4.glb" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Models/Table/Table.glb" id="4_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="5_pbw6q"]
+[ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/Customer/Customer.tscn" id="6_v1gob"]
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 volumetric_fog_enabled = true
 volumetric_fog_temporal_reprojection_amount = 0.99
 
-[node name="Main" type="Node3D" unique_id=1558236688]
+[sub_resource type="NavigationMesh" id="NavigationMesh_3n5wa"]
+vertices = PackedVector3Array(-22.534277, 1, -13.4, -22.534277, 1, 29.600002, 12.465725, 1, 29.600002, 12.465725, 1, -13.4)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_size = 0.2
 
-[node name="Platform" type="CSGBox3D" parent="." unique_id=1294509167]
-use_collision = true
-size = Vector3(26, 1, 28)
+[node name="Main" type="Node3D" unique_id=1558236688]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1741461513]
 environment = SubResource("Environment_3n5wa")
@@ -56,3 +58,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52333677, 0.49999952, -13.1
 
 [node name="Player" parent="." unique_id=1972926718 instance=ExtResource("1_r150o")]
 transform = Transform3D(0.9623565, 0, 0.27179015, 0, 1, 0, -0.27179015, 0, 0.9623565, 0.63244486, 3.736394, -0.85529494)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1232932362]
+navigation_mesh = SubResource("NavigationMesh_3n5wa")
+
+[node name="Enviroment" type="Node3D" parent="NavigationRegion3D" unique_id=652988705]
+
+[node name="Platform" type="CSGBox3D" parent="NavigationRegion3D/Enviroment" unique_id=1294509167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0671387, 0, 8.149353)
+use_collision = true
+size = Vector3(36.134277, 1, 44.298706)
+
+[node name="Customer" parent="." unique_id=1439125245 instance=ExtResource("6_v1gob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2368145, 0.50000095, 10.075342)
