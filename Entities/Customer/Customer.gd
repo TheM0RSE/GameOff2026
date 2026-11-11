@@ -17,5 +17,5 @@ func _physics_process(delta: float):
 	velocity.z = direction.z * SPEED
 	move_and_slide()
 
-func update_target_position(target_position): # Update target position for pathfinding
+func update_target_position(target_position: Vector3): # Update target position for pathfinding
 	nav_agent.target_position = target_position
