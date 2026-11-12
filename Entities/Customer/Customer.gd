@@ -1,48 +1,36 @@
 extends CharacterBody3D
 
-const SPEED = 2
+@export var movement_speed: float = 4.0
+@export var player: Node3D # Assign player node in the inspector
 
-@export var target_list : Array[Target] # List of every target the customer will go to.
-@export var nav_agent : NavigationAgent3D
-var current_target : Target # Keep track of which target the customer is going to.
+@onready var nav_agent: NavigationAgent3D =  $NavigationAgent3D
 
-var paused = false
-var pause_timer = 0
-
-func _ready():
-	if target_list.size() > 0: # If there are any targets
-		current_target = target_list[0]
-		update_target_position(current_target["target_location"])
+func _ready() -> void:
+	# Wait for the navigation map to sync
+	await get_tree().physics_frame
 	
-func _physics_process(delta: float):
-	# Gravity
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+func _physics_process(delta: float) -> void:
+	if not player:
+		return
 	
-	# Calculate velocity for pathfinding
-	var destination = nav_agent.get_next_path_position()
-	var local_destination = destination - global_position
-	var direction = local_destination.normalized()
+	# Update the navigation agent's target position to the player's position
+	nav_agent.target_position = player.global_position
 	
-	# Move customer
-	velocity.x = direction.x * SPEED
-	velocity.z = direction.z * SPEED
+	# Check if we have reached the target
+	if nav_agent.is_navigation_finished():
+		return
+		
+	# Get the next position along the path
+	var current_agent_position: Vector3 = global_position
+	var next_path_position: Vector3 = nav_agent.get_next_path_position()
+	
+	# Calculate direction and move towards the next position
+	var direction: Vector3 = current_agent_position.direction_to(next_path_position)
+	velocity = direction * movement_speed
+	
+	# Rotate smoothly to face the movement direction
+	if direction.length_squared() > 0.001:
+		look_at(Vector3(global_position.x + direction.x, global_position.y, global_position.z + direction .z), Vector3.UP)
+		
+		
 	move_and_slide()
-	
-	# Pause timer
-	if pause_timer < 0 and paused: # If the pause timer is done (below 0) and customer is paused
-		paused = false
-		target_list.remove_at(0) # Remove first target
-		if target_list.size() > 0:
-			current_target = target_list[0]
-			update_target_position(current_target["target_location"])
-		else: # If there are no targets left
-			print("FINISHED PATH")
-	pause_timer -= delta
-
-func update_target_position(target_position: Vector3): # Update target position for pathfinding
-	nav_agent.target_position = target_position
-
-func _on_navigation_agent_3d_navigation_finished() -> void:
-	pause_timer = current_target["length"] # Set a pause timer to wait before updating to next target
-	paused = true
