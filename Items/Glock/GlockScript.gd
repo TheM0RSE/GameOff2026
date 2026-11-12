@@ -24,9 +24,13 @@ func shoot():
 	if collision:
 		var coll_position = collision["position"] # Get the intersect point of the first collision
 		
+		var hit = collision["collider"]
+		if hit.has_method("take_damage"):
+			hit.take_damage(1)
+		
 		# TESTING (CREATES BOX WHERE MOUSE IS POINTED)
 		var box = CSGBox3D.new()
-		box.size = Vector3(1, 1, 1)
+		box.size = Vector3(.1, .1, .1)
 		box.position = coll_position
 		get_tree().current_scene.add_child(box)
 		# TESTING

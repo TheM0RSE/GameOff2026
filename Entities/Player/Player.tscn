@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("camera", "glock")]
+[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("camera", "glock") groups=["Player"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_3qydi")
 camera = NodePath("Camera3D")
