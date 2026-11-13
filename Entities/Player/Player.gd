@@ -104,6 +104,8 @@ func dash_and_move(delta):
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	var horizontal = Vector3(velocity.x, 0, velocity.z)
+	
 	# Register dash input
 	if Input.is_action_just_pressed("Dash") and not is_dashing:
 		# Check if the player has more than 0 dash charges
@@ -138,8 +140,9 @@ func dash_and_move(delta):
 			is_dashing = false
 	else:
 		# Apply normal movement to the player
-		velocity.x = move_toward(velocity.x, target.x, rate * delta)
-		velocity.z = move_toward(velocity.z, target.z, rate * delta)
+		horizontal = horizontal.move_toward(target, rate * delta)
+		velocity.x = horizontal.x
+		velocity.z = horizontal.z
 		
 		charges_refill_currentTime -= charges_refill_time * delta
 		
