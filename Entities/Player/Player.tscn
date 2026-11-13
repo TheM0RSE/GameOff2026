@@ -40,7 +40,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Texture" type="TextureRect" parent="Crosshair" unique_id=60384639]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
