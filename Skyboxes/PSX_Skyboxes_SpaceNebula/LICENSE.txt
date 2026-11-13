@@ -1,0 +1,8 @@
+PSX Skyboxes - Licence
+
+You may use these skyboxes in your own games and other projects, free or commercial,
+as many projects as you like. Editing, recolouring and combining them is fine.
+Credit is welcome but not required.
+
+You may not resell or redistribute the skybox images themselves, as a skybox pack,
+texture pack or asset pack or part of one, also not in modified form.
