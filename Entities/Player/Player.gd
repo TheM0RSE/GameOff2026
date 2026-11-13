@@ -65,6 +65,16 @@ func _process(delta: float) -> void:
 		speed = SPRINT_SPEED
 	else:
 		speed = WALK_SPEED
+	
+	#Toggle between locked and unlocked mouse
+	if Input.is_action_just_pressed("pause"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:	
 	# If player is not on ground
