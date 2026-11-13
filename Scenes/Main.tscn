@@ -49,6 +49,7 @@ shadow_enabled = true
 
 [node name="Player" parent="." unique_id=1972926718 instance=ExtResource("1_r150o")]
 transform = Transform3D(0.9623565, 0, 0.27179015, 0, 1, 0, -0.27179015, 0, 0.9623565, 0.63244486, 3.736394, -0.85529494)
+collision_layer = 2
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1232932362]
 navigation_mesh = SubResource("NavigationMesh_3n5wa")
@@ -75,5 +76,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2193736, 0.49999952, -5.255
 
 [node name="Customer" parent="." unique_id=1439125245 node_paths=PackedStringArray("player") instance=ExtResource("6_v1gob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2368145, 4.8552704, 10.075342)
+collision_layer = 4
 movement_speed = 2.0
 player = NodePath("../Player")

@@ -13,6 +13,8 @@ var coyote_timer = 0.0
 @export var jump_buffer_time = 0.08 # 80 ms buffer window
 var jump_buffer_timer = 0.0
 
+@export var fall_multiplier = 2.0
+
 # Stamina later
 
 const WEIGHT = 2.0
@@ -57,12 +59,17 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:	
 	# If player is not on ground
 	if not is_on_floor():
-		# Gravity
+		# Gravity normal in the start of a jump and higher with fall_multiplier when falling
+		if velocity.y < 0:
+			velocity += get_gravity() * WEIGHT * fall_multiplier * delta
+		else:
+			velocity += get_gravity() * WEIGHT * delta
+		
 		coyote_timer -= 1 * delta
-		velocity += get_gravity() * WEIGHT * delta
 		
 		# Set air rate for friction
 		rate = AIR_ACCEL
+		
 	else:
 		# Set ground rate for friction
 		rate = GROUND_ACCEL
