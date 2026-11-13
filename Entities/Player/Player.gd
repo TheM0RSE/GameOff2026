@@ -1,6 +1,9 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
+var speed: float = 0
+const WALK_SPEED = 5.0
+const SPRINT_SPEED = 8.0
+
 const JUMP_VELOCITY = 6.5
 
 const WEIGHT = 2.0
@@ -25,6 +28,11 @@ func _unhandled_input(event):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		glock.shoot()
+		
+	if Input.is_action_pressed("Sprint"):
+		speed = SPRINT_SPEED
+	else:
+		speed = WALK_SPEED
 	
 	# Apply rotation on every rendered frame
 	rotate_y(-mouse_input.x * mouse_sensitivity)
@@ -49,10 +57,10 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
