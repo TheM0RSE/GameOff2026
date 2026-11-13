@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 	if not player:
 		return
 		
-	# Add gravity when the enemy is in the air
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -36,5 +36,6 @@ func _physics_process(delta: float) -> void:
 	# Rotate smoothly to face the movement direction
 	if direction.length_squared() > 0.001:
 		look_at(Vector3(global_position.x + direction.x, global_position.y, global_position.z + direction .z), Vector3.UP)
+		
 		
 	move_and_slide()
