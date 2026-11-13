@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 var speed: float = 0
-const WALK_SPEED = 5.0
-const SPRINT_SPEED = 8.0
+const WALK_SPEED = 6.0
+const SPRINT_SPEED = 10.0
 
 # Jump
 const JUMP_VELOCITY = 6.5
@@ -17,6 +17,13 @@ var jump_buffer_timer = 0.0
 
 # Dash
 var is_dashing = false
+@export var dash_duration = 0.25
+var dash_timer = 0
+var dash_charges = 3
+var charges_refill_time = 5
+var charges_refill_currentTime = 0
+var dash_direction = Vector3.ZERO
+@export var dash_speed = 20
 
 # Stamina later
 
@@ -72,12 +79,77 @@ func _physics_process(delta: float) -> void:
 		
 		# Set air rate for friction
 		rate = AIR_ACCEL
-		
 	else:
 		# Set ground rate for friction
 		rate = GROUND_ACCEL
 		coyote_timer = coyote_time
 		
+	jump(delta)	
+	dash_and_move(delta)
+	move_and_slide()
+	
+func mouse_move():
+	# Apply rotation on every rendered framed
+	rotate_y(-mouse_input.x * mouse_sensitivity)
+	camera.rotate_x(-mouse_input.y * mouse_sensitivity)
+	
+	# Clamp vertical camera angle so you can't look upside down
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+	
+	# Clear the accumulated input so it doesn't carry over to the next frame
+	mouse_input = Vector2.ZERO
+	
+func dash_and_move(delta):
+	# Get input direction and handle movement
+	var input_dir := Input.get_vector("left", "right", "up", "down")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	# Register dash input
+	if Input.is_action_just_pressed("Dash") and not is_dashing:
+		# Check if the player has more than 0 dash charges
+		if dash_charges > 0:
+			# Remove one charge
+			dash_charges -= 1
+			print(dash_charges)
+			
+			# If moving, dash in movement direction. Otherwise dash forward
+			if direction != Vector3.ZERO:
+				dash_direction = direction
+			else:
+				dash_direction = -transform.basis.z # Default forward if standing still
+				
+			is_dashing = true
+			dash_timer = dash_duration
+			charges_refill_currentTime = charges_refill_time
+		else:
+			# print("Don't have any dash charges")
+			return
+	
+	# Set target direction
+	var target = direction * speed
+		
+	# Handle dash
+	if is_dashing:
+		dash_timer -= delta
+		velocity.x = dash_direction.x * dash_speed
+		velocity.z = dash_direction.z * dash_speed
+		
+		if dash_timer <= 0:
+			is_dashing = false
+	else:
+		# Apply normal movement to the player
+		velocity.x = move_toward(velocity.x, target.x, rate * delta)
+		velocity.z = move_toward(velocity.z, target.z, rate * delta)
+		
+		charges_refill_currentTime -= charges_refill_time * delta
+		
+		# print(charges_refill_currentTime)
+		if charges_refill_currentTime <= 0 and dash_charges < 3:
+			charges_refill_currentTime = charges_refill_time
+			dash_charges += 1
+			print(dash_charges)
+
+func jump(delta):
 	# Decrease the jump buffer timer over time
 	if jump_buffer_timer > 0:
 		jump_buffer_timer -= delta
@@ -91,27 +163,3 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		jump_buffer_timer = 0.0 # Consume the buffer
 		coyote_timer = 0.0
-
-	# Get input direction and handle movement
-	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	# Set target direction
-	var target = direction * speed
-	
-	# Apply movement to the player
-	velocity.x = move_toward(velocity.x, target.x, rate * delta)
-	velocity.z = move_toward(velocity.z, target.z, rate * delta)
-
-	move_and_slide()
-	
-func mouse_move():
-	# Apply rotation on every rendered frame
-	rotate_y(-mouse_input.x * mouse_sensitivity)
-	camera.rotate_x(-mouse_input.y * mouse_sensitivity)
-	
-	# Clamp vertical camera angle so you can't look upside down
-	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
-	
-	# Clear the accumulated input so it doesn't carry over to the next frame
-	mouse_input = Vector2.ZERO
