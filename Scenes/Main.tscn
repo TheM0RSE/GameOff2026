@@ -1,19 +1,20 @@
 [gd_scene format=3 uid="uid://dcydvs1qdue5e"]
 
+[ext_resource type="Texture2D" uid="uid://do471sf84n5uo" path="res://Skyboxes/PSX_Skyboxes_SpaceNebula/ringed_planet/panorama_1024x512.png" id="1_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Entities/Player/Player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Models/Table/Table.glb" id="4_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/Customer/Customer.tscn" id="6_v1gob"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v1gob"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v1gob"]
+panorama = ExtResource("1_pbw6q")
 
 [sub_resource type="Sky" id="Sky_rgh2o"]
-sky_material = SubResource("ProceduralSkyMaterial_v1gob")
+sky_material = SubResource("PanoramaSkyMaterial_v1gob")
 
 [sub_resource type="Environment" id="Environment_3n5wa"]
 background_mode = 2
 sky = SubResource("Sky_rgh2o")
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.99
@@ -42,7 +43,7 @@ spot_attenuation = 2.03
 spot_angle = 48.258846
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting" unique_id=407121697]
-transform = Transform3D(0.8602798, 0.30722022, -0.40685922, -0.13602787, 0.90742916, 0.3975787, 0.49134007, -0.2866847, 0.82243353, 0, 0, 0)
+transform = Transform3D(-0.62728643, 0.23172829, -0.74351454, -0.13602789, 0.9074293, 0.39757875, 0.76681685, 0.3505344, -0.5376965, 0, 6.527805, 0)
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=1972926718 instance=ExtResource("1_r150o")]
