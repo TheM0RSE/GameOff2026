@@ -13,7 +13,10 @@ var coyote_timer = 0.0
 @export var jump_buffer_time = 0.08 # 80 ms buffer window
 var jump_buffer_timer = 0.0
 
-@export var fall_multiplier = 2.0
+@export var fall_multiplier = 1.5
+
+# Dash
+var is_dashing = false
 
 # Stamina later
 
