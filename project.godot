@@ -15,10 +15,6 @@ run/main_scene="uid://dcydvs1qdue5e"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-MusicPlayer="uid://dnwykitp8g7vs"
-
 [display]
 
 window/size/viewport_width=480
@@ -81,4 +77,5 @@ common/physics_interpolation=true
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
