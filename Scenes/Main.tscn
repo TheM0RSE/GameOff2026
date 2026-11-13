@@ -15,6 +15,7 @@ sky_material = SubResource("PanoramaSkyMaterial_v1gob")
 [sub_resource type="Environment" id="Environment_3n5wa"]
 background_mode = 2
 sky = SubResource("Sky_rgh2o")
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.99
