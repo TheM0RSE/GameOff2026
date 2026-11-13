@@ -1,7 +1,9 @@
 extends CharacterBody3D
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 6.5
+
+const WEIGHT = 2.0
 
 # Mouse & camera variables
 var mouse_sensitivity := 0.005
@@ -37,7 +39,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:	
 	# Gravity
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * WEIGHT * delta
 
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():

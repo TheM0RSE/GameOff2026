@@ -6,9 +6,8 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
 
-[node name="Customer" type="CharacterBody3D" unique_id=1439125245 node_paths=PackedStringArray("nav_agent")]
+[node name="Customer" type="CharacterBody3D" unique_id=1439125245]
 script = ExtResource("1_p0mig")
-nav_agent = NodePath("NavigationAgent3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1057250039]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

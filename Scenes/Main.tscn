@@ -62,5 +62,6 @@ transform = Transform3D(0.18302657, 0.0806305, 3.5244714e-09, 0, -8.742278e-09, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2193736, 0.49999952, -5.2559977)
 
 [node name="Customer" parent="." unique_id=1439125245 node_paths=PackedStringArray("player") instance=ExtResource("6_v1gob")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2368145, 0.50000095, 10.075342)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2368145, 4.8552704, 10.075342)
+movement_speed = 2.0
 player = NodePath("../Player")
