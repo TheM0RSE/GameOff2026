@@ -12,6 +12,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not player:
 		return
+		
+	# Gravity
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	
 	# Update the navigation agent's target position to the player's position
 	nav_agent.target_position = player.global_position
@@ -26,7 +30,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Calculate direction and move towards the next position
 	var direction: Vector3 = current_agent_position.direction_to(next_path_position)
-	velocity = direction * movement_speed
+	velocity.x = direction.x * movement_speed
+	velocity.z = direction.z * movement_speed
 	
 	# Rotate smoothly to face the movement direction
 	if direction.length_squared() > 0.001:
