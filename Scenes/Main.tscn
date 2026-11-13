@@ -5,8 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/Customer/Customer.tscn" id="6_v1gob"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v1gob"]
+
+[sub_resource type="Sky" id="Sky_rgh2o"]
+sky_material = SubResource("ProceduralSkyMaterial_v1gob")
+
 [sub_resource type="Environment" id="Environment_3n5wa"]
+background_mode = 2
+sky = SubResource("Sky_rgh2o")
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
 volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.99
 
