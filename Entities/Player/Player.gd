@@ -1,8 +1,7 @@
 extends CharacterBody3D
 
 var speed: float = 0
-const WALK_SPEED = 6.0
-const SPRINT_SPEED = 10.0
+const WALK_SPEED = 10.0
 
 # Jump
 const JUMP_VELOCITY = 6.5
@@ -59,12 +58,6 @@ func _process(delta: float) -> void:
 	
 	# Call mouse move function
 	mouse_move()
-	
-	# If left shift is held, change speed to sprint speed.
-	if Input.is_action_pressed("Sprint"):
-		speed = SPRINT_SPEED
-	else:
-		speed = WALK_SPEED
 	
 	#Toggle between locked and unlocked mouse
 	if Input.is_action_just_pressed("pause"):
@@ -138,7 +131,7 @@ func dash_and_move(delta):
 			return
 	
 	# Set target direction
-	var target = direction * speed
+	var target = direction * WALK_SPEED
 		
 	# Handle dash
 	if is_dashing:
