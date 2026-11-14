@@ -1,17 +1,12 @@
 [gd_scene format=3 uid="uid://dulq0ckibflvo"]
 
-[ext_resource type="Script" uid="uid://34xxbmqyql2y" path="res://Entities/Customer/Customer.gd" id="1_p0mig"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_3n5wa"]
+[ext_resource type="Script" uid="uid://34xxbmqyql2y" path="res://Entities/WorkerRobot/WorkerRobot.gd" id="1_5ftmo"]
+[ext_resource type="PackedScene" uid="uid://di22cv37rkwwt" path="res://Entities/WorkerRobot/Model/WorkerRobotModel.tscn" id="2_tppu8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
 
 [node name="Customer" type="CharacterBody3D" unique_id=1439125245]
-script = ExtResource("1_p0mig")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1057250039]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_3n5wa")
+script = ExtResource("1_5ftmo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1932769100]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -24,5 +19,7 @@ path_max_distance = 5.01
 simplify_path = true
 debug_enabled = true
 debug_use_custom = true
+
+[node name="Model" parent="." unique_id=1440048831 instance=ExtResource("2_tppu8")]
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]

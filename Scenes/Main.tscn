@@ -5,7 +5,8 @@
 [ext_resource type="Material" uid="uid://c15qc4yy034j3" path="res://Environment/Materials/Rock/Rock_01/new_standard_material_3d.tres" id="3_v1gob"]
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Models/Table/Table.glb" id="4_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="5_pbw6q"]
-[ext_resource type="PackedScene" uid="uid://x8lmalqrs4c6" path="res://Entities/Customer/hip_hop_dancing.tscn" id="7_jw32o"]
+[ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/WorkerRobot/WorkerRobot.tscn" id="7_50glp"]
+[ext_resource type="PackedScene" uid="uid://x8lmalqrs4c6" path="res://Entities/HipHopDancer/hip_hop_dancing.tscn" id="7_jw32o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v1gob"]
 panorama = ExtResource("1_pbw6q")
@@ -92,3 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2193736, 0.49999952, -5.255
 
 [node name="Hip Hop Dancing" parent="." unique_id=1385225825 instance=ExtResource("7_jw32o")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.7819068, 1.4453683, 4.540786)
+
+[node name="Customer" parent="." unique_id=1439125245 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.394899, 0.49489495, 3.121523)
+player = NodePath("../Player")
