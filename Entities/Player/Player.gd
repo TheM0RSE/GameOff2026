@@ -132,7 +132,6 @@ func dash_and_move(delta):
 	
 	# Set target direction
 	var target = direction * WALK_SPEED
-		
 	# Handle dash
 	if is_dashing:
 		dash_timer -= delta
