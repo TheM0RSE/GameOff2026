@@ -196,11 +196,12 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a4rd5"]
-height = 70.0
-radius = 70.0
+height = 80.0
+radius = 80.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3n5wa"]
-size = Vector3(300, 500, 200)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a4rd5"]
+radius = 200.0
+height = 550.0
 
 [sub_resource type="Animation" id="Animation_gok1o"]
 resource_name = "mixamo_com"
@@ -1112,8 +1113,8 @@ external_skeleton = NodePath("..")
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Armature/Skeleton3D/BodyColliderAttachment/BodyCollider" unique_id=2105566444]
-transform = Transform3D(1.0000017, 9.313226e-10, 5.5134296e-07, -1.527369e-07, 1, 1.4901161e-08, -2.9802322e-07, 0, 1, 4.7683716e-07, -75.20734, 7.6293945e-06)
-shape = SubResource("BoxShape3D_3n5wa")
+transform = Transform3D(1.0000017, 9.313226e-10, 5.5134296e-07, -1.527369e-07, 1, 1.4901161e-08, -2.9802322e-07, 0, 1, 0.18857813, -84.66728, 1.8967819)
+shape = SubResource("CapsuleShape3D_a4rd5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model" unique_id=878589900]
 libraries/ = SubResource("AnimationLibrary_20xr6")
