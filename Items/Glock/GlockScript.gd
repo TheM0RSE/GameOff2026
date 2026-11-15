@@ -5,7 +5,7 @@ class_name Glock
 @export var animation_player : AnimationPlayer
 @export var camera : Camera3D
 
-@export var damage = 10
+@export var damage = 20
 @export var shoot_rate = 0.2 # Gun delay
 var shoot_rate_timer = 0.0
 
