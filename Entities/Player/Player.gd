@@ -100,9 +100,6 @@ func _process(delta: float) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			
-	if Input.is_action_just_pressed("reset"):
-		get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:	
 	mantle_cooldown -= delta

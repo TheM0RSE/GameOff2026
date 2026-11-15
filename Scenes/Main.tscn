@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/WorkerRobot/WorkerRobot.tscn" id="7_50glp"]
 [ext_resource type="PackedScene" uid="uid://x8lmalqrs4c6" path="res://Entities/HipHopDancer/hip_hop_dancing.tscn" id="7_jw32o"]
+[ext_resource type="Script" uid="uid://yrluxyy2xw4n" path="res://Scenes/game_manager.gd" id="8_50glp"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v1gob"]
 panorama = ExtResource("1_pbw6q")
@@ -105,3 +106,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.7
 [node name="Customer" parent="." unique_id=1439125245 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.394899, 0.49489495, 3.121523)
 player = NodePath("../Player")
+
+[node name="GameManager" type="Node3D" parent="." unique_id=1375902964]
+script = ExtResource("8_50glp")
