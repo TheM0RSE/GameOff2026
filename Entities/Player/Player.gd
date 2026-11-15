@@ -120,11 +120,12 @@ func _physics_process(delta: float) -> void:
 # Update player height
 func update_height(delta):
 	var target_height = STAND_HEIGHT
-	var drop = STAND_HEIGHT - target_height
-	var cam_target = stand_cam_y - drop
 	
 	if is_sliding:
 		target_height = LOW_HEIGHT
+	
+	var drop = STAND_HEIGHT - target_height
+	var cam_target = stand_cam_y - drop
 		
 	collision.shape.height = target_height
 	collision.position.y = stand_col_y - drop / 2
@@ -194,7 +195,8 @@ func dash_and_move(delta):
 		var n := get_floor_normal()
 		var downhill := Vector3.DOWN - n * Vector3.DOWN.dot(n)
 		
-		horizontal += downhill * SLOPE_ACCEL * delta
+		if n.y > 0.7:
+			horizontal += downhill * SLOPE_ACCEL * delta
 		
 		# Stop conditions
 		if horizontal.length() < SLIDE_MIN_SPEED or not Input.is_action_pressed("Slide"):
@@ -219,7 +221,9 @@ func dash_and_move(delta):
 	
 	if is_sliding and is_on_floor():
 		var n := get_floor_normal()
-		velocity.y = -(n.x * velocity.x + n.z * velocity.z) / n.y
+		if n.y > 0.7:
+			var follow_y = -(n.x * velocity.x + n.z * velocity.z) / n.y
+			velocity.y = min(follow_y, 0.0)
 
 func jump(delta):
 	
