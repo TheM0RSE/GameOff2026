@@ -73,6 +73,8 @@ var last_speed = 0
 var vault_direction = Vector3.ZERO
 var vault_speed = 0.0
 
+const WALL_SPEED_DECAY = 60.0
+
 # Stamina later
 
 const WEIGHT = 2.0
@@ -144,8 +146,12 @@ func _physics_process(delta: float) -> void:
 	dash_and_move(delta)
 	update_height(delta)
 	
+	var h_speed_now = Vector3(velocity.x, 0, velocity.z).length()
+	
 	if not is_on_wall():
-		last_speed = Vector3(velocity.x, 0, velocity.y).length()
+		last_speed = h_speed_now
+	else:
+		last_speed = move_toward(last_speed, h_speed_now, WALL_SPEED_DECAY * delta)
 	
 	var was_on_floor = is_on_floor()
 	var fall_speed = -velocity.y # How fast we are falling
