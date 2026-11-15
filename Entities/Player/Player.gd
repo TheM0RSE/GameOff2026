@@ -294,7 +294,6 @@ func dash_and_move(delta):
 		if charges_refill_currentTime <= 0 and dash_charges < 3:
 			charges_refill_currentTime = charges_refill_time
 			dash_charges += 1
-			print(dash_charges)
 			
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
@@ -348,9 +347,6 @@ func vault(ledge_point):
 
 	vault_direction = -transform.basis.z
 	vault_speed = max(last_speed, 4.0)
-
-	# Camera starts a bit lower and glides up = smooth climb feel
-	camera.position.y -= 0.4
 
 # Handle camera effects
 func update_camera_fx(delta):
