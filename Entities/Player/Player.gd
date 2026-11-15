@@ -7,9 +7,26 @@ const LOW_HEIGHT = 1.0
 var stand_cam_y = 0.0
 var stand_col_y = 0.0
 
+# Camera effects
+var base_fov = 0
+const WALK_FOV_PER_SPEED = 0.5
+const FAST_FOV_PER_SPEED = 1.5
+const MAX_FOV_BOOST = 100.0
+
+const TILT_ANGLE = 1.5 # degrees
+var camera_fx_strength = 1.0 # 1.0 = full, 0.0 = off
+
+var mouse_turn = 0.0
+const MOUSE_TILT = 0.002 # How much tilt per mouse movement
+const MAX_MOUSE_TILT = 2.0 # Degrees
+
+var shake = 0.0
+
 # Move Variables
 var speed: float = 0
 const WALK_SPEED = 10.0
+
+const HARD_LANDING_SPEED = 12.0
 
 # Jump
 const JUMP_VELOCITY = 6.5
@@ -80,6 +97,7 @@ func _ready() -> void:
 	stand_cam_y = camera.position.y
 	stand_col_y = collision.position.y
 	speed = WALK_SPEED
+	base_fov = camera.fov
 	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -130,8 +148,14 @@ func _physics_process(delta: float) -> void:
 		last_speed = Vector3(velocity.x, 0, velocity.y).length()
 	
 	var was_on_floor = is_on_floor()
+	var fall_speed = -velocity.y # How fast we are falling
 	move_and_slide()
+	update_camera_fx(delta)
 	just_landed = is_on_floor() and not was_on_floor
+	
+	if just_landed and fall_speed > HARD_LANDING_SPEED:
+		var impact = (fall_speed - HARD_LANDING_SPEED) * 0.005
+		shake = max(shake, clamp(impact, 0.0, 0.08))
 
 # Update player height
 func update_height(delta):
@@ -156,6 +180,8 @@ func mouse_move():
 	
 	# Clamp vertical camera angle so you can't look upside down
 	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+	
+	mouse_turn += mouse_input.x
 	
 	# Clear the accumulated input so it doesn't carry over to the next frame
 	mouse_input = Vector2.ZERO
@@ -182,6 +208,8 @@ func dash_and_move(delta):
 				dash_direction = -transform.basis.z # Default forward if standing still
 				
 			is_dashing = true
+			camera.fov += 12 * camera_fx_strength
+			shake = 0.04
 			dash_timer = dash_duration
 			charges_refill_currentTime = charges_refill_time
 		else:
@@ -292,3 +320,38 @@ func vault(ledge_point):
 	
 	vault_direction = -transform.basis.z
 	vault_speed = max(last_speed, speed)
+	
+func update_camera_fx(delta):
+	var h_speed = Vector3(velocity.x, 0, velocity.z).length()
+	
+	var walk_part = min(h_speed, WALK_SPEED)
+	var fast_part = max(h_speed - WALK_SPEED, 0)
+	
+	var boost = walk_part * WALK_FOV_PER_SPEED + fast_part * FAST_FOV_PER_SPEED
+	boost = clamp(boost, 0, MAX_FOV_BOOST)
+	
+	camera.fov = lerp(camera.fov, base_fov + boost, 8 * delta)
+	
+	# Camera tilt when strafing
+	var input_dir = Input.get_vector("left", "right", "up", "down")
+	var target_tilt = -input_dir.x * deg_to_rad(TILT_ANGLE) * camera_fx_strength
+	
+	# Tilt when turning with the mouse (only when moving)
+	var move_factor = clamp(h_speed / WALK_SPEED, 0.0, 1.0)
+	var turn_tilt = clamp(-mouse_turn * MOUSE_TILT, -deg_to_rad(MAX_MOUSE_TILT), deg_to_rad(MAX_MOUSE_TILT))
+	target_tilt += turn_tilt * move_factor * camera_fx_strength
+	mouse_turn = 0.0
+	
+	if is_sliding:
+		var side = slide_direction.dot(transform.basis.x)
+		target_tilt += -side * deg_to_rad(5)
+	
+	camera.rotation.z = lerp(camera.rotation.z, target_tilt, 10 * delta)
+	
+	if is_sliding and is_on_floor():
+		shake = max(shake, 0.005)
+	
+	var s = shake * camera_fx_strength
+	camera.h_offset = randf_range(-s, s)
+	camera.v_offset = randf_range(-s, s)
+	shake = move_toward(shake, 0.0, 0.8 * delta)
