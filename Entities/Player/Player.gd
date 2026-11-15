@@ -43,6 +43,19 @@ const SLOPE_ACCEL = 60
 var was_on_floor = false
 var just_landed = false
 
+# Mantling
+@export var chest_ray : RayCast3D
+@export var head_ray : RayCast3D
+@export var top_ray : RayCast3D
+@export var ceiling_ray : RayCast3D
+
+var mantle_cooldown = 0.0
+const MANTLE_COOLDOWN_TIME = 0.25
+var last_speed = 0
+
+var vault_direction = Vector3.ZERO
+var vault_speed = 0.0
+
 # Stamina later
 
 const WEIGHT = 2.0
@@ -92,6 +105,8 @@ func _process(delta: float) -> void:
 		get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:	
+	mantle_cooldown -= delta
+	
 	# If player is not on ground
 	if not is_on_floor():
 		# Gravity normal in the start of a jump and higher with fall_multiplier when falling
@@ -110,8 +125,12 @@ func _physics_process(delta: float) -> void:
 		coyote_timer = coyote_time
 		
 	jump(delta)	
+	check_mantle(delta)
 	dash_and_move(delta)
 	update_height(delta)
+	
+	if not is_on_wall():
+		last_speed = Vector3(velocity.x, 0, velocity.y).length()
 	
 	var was_on_floor = is_on_floor()
 	move_and_slide()
@@ -121,7 +140,8 @@ func _physics_process(delta: float) -> void:
 func update_height(delta):
 	var target_height = STAND_HEIGHT
 	
-	if is_sliding:
+	# Check if the player is sliding or if the player is still under something while in a slide
+	if is_sliding or ceiling_ray.is_colliding():
 		target_height = LOW_HEIGHT
 	
 	var drop = STAND_HEIGHT - target_height
@@ -189,6 +209,10 @@ func dash_and_move(delta):
 		
 		if dash_timer <= 0:
 			is_dashing = false
+			
+	elif mantle_cooldown > 0:
+		horizontal = vault_direction * vault_speed
+		
 	elif is_sliding:
 		horizontal = horizontal.move_toward(Vector3.ZERO, SLIDE_FRICTION * delta)
 		
@@ -199,14 +223,15 @@ func dash_and_move(delta):
 			horizontal += downhill * SLOPE_ACCEL * delta
 		
 		# Stop conditions
-		if horizontal.length() < SLIDE_MIN_SPEED or not Input.is_action_pressed("Slide"):
+		if horizontal.length() < SLIDE_MIN_SPEED or (not Input.is_action_pressed("Slide") and not ceiling_ray.is_colliding()):
 			is_sliding = false
+			
 	else:
-		# Apply normal movement to the player
-		horizontal = horizontal.move_toward(target, rate * delta)
-		
 		if not is_on_floor() and direction != Vector3.ZERO and horizontal.length() > speed:
 			target = direction * horizontal.length()
+		
+		# Apply normal movement to the player
+		horizontal = horizontal.move_toward(target, rate * delta)
 		
 		charges_refill_currentTime -= charges_refill_time * delta
 		
@@ -227,7 +252,6 @@ func dash_and_move(delta):
 
 func jump(delta):
 	
-	
 	# Decrease the jump buffer timer over time
 	if jump_buffer_timer > 0:
 		jump_buffer_timer -= delta
@@ -244,3 +268,30 @@ func jump(delta):
 		velocity.y = JUMP_VELOCITY
 		jump_buffer_timer = 0.0 # Consume the buffer
 		coyote_timer = 0.0
+		
+func check_mantle(delta):
+	var input_dir := Input.get_vector("left", "right", "up", "down")
+	
+	var h_speed = Vector3(velocity.x, 0, velocity.z).length()
+	var look = max(1.2, h_speed * 0.15)
+	
+	chest_ray.target_position.z = -look
+	head_ray.target_position.z = -look
+	top_ray.position.z = -(look - 0.2)
+	
+	if not is_on_floor() and mantle_cooldown <= 0 and input_dir.y < 0 and not is_sliding and chest_ray.is_colliding() and not head_ray.is_colliding() and top_ray.is_colliding():
+		var ledge_point = top_ray.get_collision_point()
+		vault(top_ray.get_collision_point())
+	
+func vault(ledge_point):
+	is_dashing = false
+	mantle_cooldown = MANTLE_COOLDOWN_TIME
+	
+	var feet_y = global_position.y - STAND_HEIGHT / 2
+	var height = ledge_point.y - feet_y + 0.3
+	
+	var g = get_gravity().length() * WEIGHT
+	velocity.y = sqrt(2 * g * height)
+	
+	vault_direction = -transform.basis.z
+	vault_speed = max(last_speed, speed)
