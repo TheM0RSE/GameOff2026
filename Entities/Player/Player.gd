@@ -13,7 +13,7 @@ const WALK_FOV_PER_SPEED = 0.5
 const FAST_FOV_PER_SPEED = 1.5
 const MAX_FOV_BOOST = 100.0
 
-const TILT_ANGLE = 1.5 # degrees
+const TILT_ANGLE = 2 # degrees
 var camera_fx_strength = 1.0 # 1.0 = full, 0.0 = off
 
 var mouse_turn = 0.0
@@ -21,6 +21,10 @@ const MOUSE_TILT = 0.002 # How much tilt per mouse movement
 const MAX_MOUSE_TILT = 2.0 # Degrees
 
 var shake = 0.0
+
+var cam_smooth_y = 0.0
+const CAM_SMOOTH = 14.0 # Higher = less smoothing
+const CAM_MAX_LAG = 0.25
 
 # Move Variables
 var speed: float = 0
@@ -67,13 +71,17 @@ var just_landed = false
 @export var ceiling_ray : RayCast3D
 
 var mantle_cooldown = 0.0
-const MANTLE_COOLDOWN_TIME = 0.25
+const MANTLE_COOLDOWN_TIME = 0.35
 var last_speed = 0
 
 var vault_direction = Vector3.ZERO
 var vault_speed = 0.0
 
-const WALL_SPEED_DECAY = 60.0
+const WALL_SPEED_DECAY = 400.0
+
+var is_vaulting = false
+var vault_ledge_y = 0.0
+const VAULT_LIFT_SPEED = 9.0
 
 # Stamina later
 
@@ -96,6 +104,7 @@ var cam_rotation := Vector2.ZERO
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # Lock mouse ingame
+	cam_smooth_y = camera.global_position.y
 	stand_cam_y = camera.position.y
 	stand_col_y = collision.position.y
 	speed = WALK_SPEED
@@ -177,7 +186,16 @@ func update_height(delta):
 	collision.shape.height = target_height
 	collision.position.y = stand_col_y - drop / 2
 	
-	camera.position.y = lerp(camera.position.y, cam_target, 15 * delta)
+	var desired_y = global_position.y + cam_target
+
+	# Follow it smoothly
+	cam_smooth_y = lerp(cam_smooth_y, desired_y, CAM_SMOOTH * delta)
+
+	# But never fall too far behind (e.g. long falls or fast jumps)
+	cam_smooth_y = clamp(cam_smooth_y, desired_y - CAM_MAX_LAG, desired_y + CAM_MAX_LAG)
+
+	# Turn that world height back into the camera's local height
+	camera.position.y = cam_smooth_y - global_position.y
 	
 func mouse_move():
 	# Apply rotation on every rendered framed
@@ -243,6 +261,15 @@ func dash_and_move(delta):
 			
 	elif mantle_cooldown > 0:
 		horizontal = vault_direction * vault_speed
+		
+		var feet_y = global_position.y - STAND_HEIGHT / 2
+		var remaining = (vault_ledge_y + 0.1) - feet_y
+		
+		if is_vaulting and remaining > 0:
+			velocity.y = clamp(remaining * 15.0, 3.0, VAULT_LIFT_SPEED)
+		elif is_vaulting:
+			velocity.y = 0.0
+			is_vaulting = false
 		
 	elif is_sliding:
 		horizontal = horizontal.move_toward(Vector3.ZERO, SLIDE_FRICTION * delta)
@@ -313,20 +340,22 @@ func check_mantle(delta):
 	if not is_on_floor() and mantle_cooldown <= 0 and input_dir.y < 0 and not is_sliding and chest_ray.is_colliding() and not head_ray.is_colliding() and top_ray.is_colliding():
 		var ledge_point = top_ray.get_collision_point()
 		vault(top_ray.get_collision_point())
-	
+
+# Handle mantling
 func vault(ledge_point):
 	is_dashing = false
 	mantle_cooldown = MANTLE_COOLDOWN_TIME
 	
-	var feet_y = global_position.y - STAND_HEIGHT / 2
-	var height = ledge_point.y - feet_y + 0.3
-	
-	var g = get_gravity().length() * WEIGHT
-	velocity.y = sqrt(2 * g * height)
-	
+	vault_ledge_y = ledge_point.y
+	is_vaulting = true
+
 	vault_direction = -transform.basis.z
-	vault_speed = max(last_speed, speed)
-	
+	vault_speed = max(last_speed, 4.0)
+
+	# Camera starts a bit lower and glides up = smooth climb feel
+	camera.position.y -= 0.4
+
+# Handle camera effects
 func update_camera_fx(delta):
 	var h_speed = Vector3(velocity.x, 0, velocity.z).length()
 	
