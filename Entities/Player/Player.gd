@@ -23,8 +23,10 @@ const MAX_MOUSE_TILT = 2.0 # Degrees
 var shake = 0.0
 
 var cam_smooth_y = 0.0
-const CAM_SMOOTH = 14.0 # Higher = less smoothing
-const CAM_MAX_LAG = 0.25
+const CAM_SMOOTH = 20.0 # Higher = less smoothing
+const CAM_MAX_LAG = 0.15
+
+var cam_offset = 0.0
 
 # Move Variables
 var speed: float = 0
@@ -48,7 +50,7 @@ var is_dashing = false
 @export var dash_duration = 0.25
 var dash_timer = 0
 var dash_charges = 3
-var charges_refill_time = 5
+var charges_refill_time = 1.5
 var charges_refill_currentTime = 0
 var dash_direction = Vector3.ZERO
 @export var dash_speed = 20
@@ -109,6 +111,7 @@ func _ready() -> void:
 	stand_col_y = collision.position.y
 	speed = WALK_SPEED
 	base_fov = camera.fov
+	cam_offset = stand_cam_y
 	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -186,13 +189,15 @@ func update_height(delta):
 	collision.shape.height = target_height
 	collision.position.y = stand_col_y - drop / 2
 	
-	var desired_y = global_position.y + cam_target
+	# Eye height glides smoothly between standing and sliding
+	cam_offset = lerp(cam_offset, cam_target, 14 * delta)
+	var desired_y = global_position.y + cam_offset
 
-	# Follow it smoothly
-	cam_smooth_y = lerp(cam_smooth_y, desired_y, CAM_SMOOTH * delta)
-
-	# But never fall too far behind (e.g. long falls or fast jumps)
-	cam_smooth_y = clamp(cam_smooth_y, desired_y - CAM_MAX_LAG, desired_y + CAM_MAX_LAG)
+	if is_vaulting or is_on_floor():
+		cam_smooth_y = lerp(cam_smooth_y, desired_y, CAM_SMOOTH * delta)
+		cam_smooth_y = clamp(cam_smooth_y, desired_y - CAM_MAX_LAG, desired_y + CAM_MAX_LAG)
+	else:
+		cam_smooth_y = desired_y
 
 	# Turn that world height back into the camera's local height
 	camera.position.y = cam_smooth_y - global_position.y
@@ -235,7 +240,6 @@ func dash_and_move(delta):
 			camera.fov += 12 * camera_fx_strength
 			shake = 0.04
 			dash_timer = dash_duration
-			charges_refill_currentTime = charges_refill_time
 			
 	# Register slide input
 	if ((Input.is_action_just_pressed("Slide") and is_on_floor()) or (Input.is_action_pressed("Slide") and just_landed)) and not is_sliding:
@@ -288,12 +292,12 @@ func dash_and_move(delta):
 		# Apply normal movement to the player
 		horizontal = horizontal.move_toward(target, rate * delta)
 		
-		charges_refill_currentTime -= delta
-		
-		# print(charges_refill_currentTime)
-		if charges_refill_currentTime <= 0 and dash_charges < 3:
-			charges_refill_currentTime = charges_refill_time
-			dash_charges += 1
+	charges_refill_currentTime -= delta
+	
+	# print(charges_refill_currentTime)
+	if charges_refill_currentTime <= 0 and dash_charges < 3:
+		charges_refill_currentTime = charges_refill_time
+		dash_charges += 1
 			
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
