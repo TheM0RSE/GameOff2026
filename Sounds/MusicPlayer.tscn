@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dnwykitp8g7vs"]
 
-[ext_resource type="AudioStream" uid="uid://boawtgnr1pjy1" path="res://Sounds/Ambient.wav" id="1_1a72i"]
+[ext_resource type="AudioStream" uid="uid://8qya0k2c08n" path="res://Sounds/Gaming.wav" id="1_sd5s3"]
+[ext_resource type="Script" uid="uid://x3c5oillecfg" path="res://Sounds/music_player.gd" id="2_1tckf"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer" unique_id=1018079355]
-stream = ExtResource("1_1a72i")
-volume_db = -10.0
-autoplay = true
+stream = ExtResource("1_sd5s3")
+volume_db = -5.0
+script = ExtResource("2_1tckf")
