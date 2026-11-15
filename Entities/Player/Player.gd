@@ -236,9 +236,6 @@ func dash_and_move(delta):
 			shake = 0.04
 			dash_timer = dash_duration
 			charges_refill_currentTime = charges_refill_time
-		else:
-			# print("Don't have any dash charges")
-			return
 			
 	# Register slide input
 	if ((Input.is_action_just_pressed("Slide") and is_on_floor()) or (Input.is_action_pressed("Slide") and just_landed)) and not is_sliding:
@@ -291,7 +288,7 @@ func dash_and_move(delta):
 		# Apply normal movement to the player
 		horizontal = horizontal.move_toward(target, rate * delta)
 		
-		charges_refill_currentTime -= charges_refill_time * delta
+		charges_refill_currentTime -= delta
 		
 		# print(charges_refill_currentTime)
 		if charges_refill_currentTime <= 0 and dash_charges < 3:
