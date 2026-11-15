@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/WorkerRobot/WorkerRobot.tscn" id="7_50glp"]
 [ext_resource type="PackedScene" uid="uid://x8lmalqrs4c6" path="res://Entities/HipHopDancer/hip_hop_dancing.tscn" id="7_jw32o"]
 [ext_resource type="Script" uid="uid://yrluxyy2xw4n" path="res://Scenes/game_manager.gd" id="8_50glp"]
+[ext_resource type="Script" uid="uid://b7j8oinw4ygei" path="res://Scenes/fps.gd" id="9_vy5pj"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v1gob"]
 panorama = ExtResource("1_pbw6q")
@@ -109,3 +110,14 @@ player = NodePath("../Player")
 
 [node name="GameManager" type="Node3D" parent="." unique_id=1375902964]
 script = ExtResource("8_50glp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=786350411]
+
+[node name="FPS" type="Label" parent="CanvasLayer" unique_id=2079685056]
+texture_filter = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 45.0
+offset_bottom = 28.0
+size_flags_horizontal = 4
+script = ExtResource("9_vy5pj")
