@@ -5,6 +5,7 @@ class_name Glock
 @export var animation_player : AnimationPlayer
 @export var camera : Camera3D
 
+@export var damage = 20
 @export var shoot_rate = 0.2 # Gun delay
 var shoot_rate_timer = 0.0
 
@@ -19,14 +20,18 @@ func shoot():
 	var ray_from = camera.project_ray_origin(mouse_pos)
 	var ray_to = camera.project_ray_normal(mouse_pos) * RAY_LENGTH
 	var space_state = get_world_3d().direct_space_state
-	var collision = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(ray_from, ray_to))
+	var query = PhysicsRayQueryParameters3D.create(ray_from, ray_to)
+	query.collision_mask = 3
+	query.collide_with_areas = true
+	var collision = space_state.intersect_ray(query)
+	
 	
 	if collision:
 		var coll_position = collision["position"] # Get the intersect point of the first collision
 		
 		var hit = collision["collider"]
-		if hit.has_method("take_damage"):
-			hit.take_damage(1)
+		if hit.owner.has_method("take_damage"):
+			hit.owner.take_damage(hit, damage)
 		
 		# TESTING (CREATES BOX WHERE MOUSE IS POINTED)
 		var box = CSGBox3D.new()
