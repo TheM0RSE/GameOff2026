@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://dqw8eu2rkg3ea"]
+
+[ext_resource type="Texture2D" uid="uid://do471sf84n5uo" path="res://Skyboxes/PSX_Skyboxes_SpaceNebula/ringed_planet/panorama_1024x512.png" id="1_pyk7t"]
+[ext_resource type="Material" uid="uid://c15qc4yy034j3" path="res://Environment/Materials/Rock/Rock_01/new_standard_material_3d.tres" id="1_x00a1"]
+[ext_resource type="PackedScene" uid="uid://c2f7or57sbcfm" path="res://Entities/Player/Player.tscn" id="2_x00a1"]
+[ext_resource type="Script" uid="uid://b7j8oinw4ygei" path="res://Scenes/fps.gd" id="3_4f205"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dpcf1"]
+panorama = ExtResource("1_pyk7t")
+
+[sub_resource type="Sky" id="Sky_rgh2o"]
+sky_material = SubResource("PanoramaSkyMaterial_dpcf1")
+
+[sub_resource type="Environment" id="Environment_jhdhk"]
+background_mode = 2
+sky = SubResource("Sky_rgh2o")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_temporal_reprojection_enabled = false
+volumetric_fog_temporal_reprojection_amount = 0.99
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_bugre"]
+cell_height = 0.1
+agent_height = 2.0
+agent_radius = 1.0
+
+[node name="Arena" type="Node3D" unique_id=58985104]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1538469879]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=748232687]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_3d = true
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=602173585]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/World" unique_id=242327359]
+environment = SubResource("Environment_jhdhk")
+
+[node name="Lighting" type="Node3D" parent="SubViewportContainer/SubViewport/World" unique_id=711095918]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/World/Lighting" unique_id=1710131838]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 11.633233, 0)
+spot_range = 35.08089
+spot_angle = 72.64088
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World/Lighting" unique_id=680303603]
+transform = Transform3D(1, 0, 0, 0, -0.08647967, 0.9962536, 0, -0.9962536, -0.08647967, 0, 0, 0)
+
+[node name="Player" parent="SubViewportContainer/SubViewport/World" unique_id=1972926718 instance=ExtResource("2_x00a1")]
+transform = Transform3D(0.9623565, 0, 0.27179015, 0, 1, 0, -0.27179015, 0, 0.9623565, 0.63244486, 3.736394, -0.85529494)
+floor_snap_length = 0.5
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport/World" unique_id=1495084746]
+navigation_mesh = SubResource("NavigationMesh_bugre")
+
+[node name="Enviroment" type="Node3D" parent="SubViewportContainer/SubViewport/World/NavigationRegion3D" unique_id=1156915780]
+
+[node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport/World/NavigationRegion3D/Enviroment" unique_id=1504979997]
+
+[node name="Map" type="Node3D" parent="SubViewportContainer/SubViewport/World" unique_id=696249064]
+
+[node name="Walls" type="Node3D" parent="SubViewportContainer/SubViewport/World/Map" unique_id=371894450]
+
+[node name="Wall3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=1219544446]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 10, -34.714, 15, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Wall4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=673339418]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 10, 34.7, 15, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Wall" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=1325463078]
+transform = Transform3D(50, 0, 0, 0, 2, 0, 0, 0, 1, 0, 15, 55)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Wall2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=725099399]
+transform = Transform3D(50, 0, 0, 0, 2, 0, 0, 0, 1, 0, 15, -55)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Ground" type="Node3D" parent="SubViewportContainer/SubViewport/World/Map" unique_id=1195122804]
+
+[node name="Catwalk" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=803015179]
+transform = Transform3D(5, 0, 0, 0, 0.5, 0, 0, 0, 10, 29, 0, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Catwalk2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=2127108455]
+transform = Transform3D(5, 0, 0, 0, 0.5, 0, 0, 0, 10, -29, 0, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Floor" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=1945279638]
+transform = Transform3D(6, 0, 0, 0, 0.128, 0, 0, 0, 10, 0, 0, 0)
+use_collision = true
+size = Vector3(8.79541, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Floor3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground/Floor" unique_id=554403951]
+transform = Transform3D(0.30355895, 0, 0, 0, 1, 0, 0, 0, 0.225254, 0, 0.28020513, -3.5067892)
+operation = 2
+use_collision = true
+size = Vector3(8.79541, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Floor4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground/Floor" unique_id=305481919]
+transform = Transform3D(0.30355895, 0, 0, 0, 1, 0, 0, 0, 0.225254, 0, 0.2802051, -3.5067892)
+operation = 2
+use_collision = true
+size = Vector3(8.79541, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Ramp" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=440001899]
+transform = Transform3D(0.6406353, 0.051063485, 0, -0.2787093, 0.11737342, 0, 0, 0, 7.359097, -5.697479, -1.109005, -35.312733)
+use_collision = true
+size = Vector3(8.624512, 17.690247, 3.3928223)
+material = ExtResource("1_x00a1")
+
+[node name="Ramp2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=810115362]
+transform = Transform3D(-0.6406353, -0.051063474, -6.433527e-07, -0.27870926, 0.11737342, 0, 5.600612e-08, 4.4641113e-09, -7.359097, 5.695953, -1.109005, -35.312733)
+use_collision = true
+size = Vector3(8.624512, 17.690247, 3.3928223)
+material = ExtResource("1_x00a1")
+
+[node name="UI" type="Control" parent="." unique_id=1389329484]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=725253805]
+
+[node name="FPS" type="Label" parent="UI/CanvasLayer" unique_id=1667780068]
+texture_filter = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 363.0
+offset_bottom = 112.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 80
+script = ExtResource("3_4f205")
