@@ -7,7 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/WorkerRobot/WorkerRobot.tscn" id="7_50glp"]
 [ext_resource type="PackedScene" uid="uid://x8lmalqrs4c6" path="res://Entities/HipHopDancer/hip_hop_dancing.tscn" id="7_jw32o"]
+[ext_resource type="Texture2D" uid="uid://natl2uxltb2c" path="res://UI/GearMeter/Gear.png" id="9_bmxlf"]
 [ext_resource type="Script" uid="uid://b7j8oinw4ygei" path="res://Scenes/fps.gd" id="9_vy5pj"]
+[ext_resource type="Texture2D" uid="uid://df0kuen0jgi5y" path="res://UI/GearMeter/GearMeterBorder.png" id="10_4kpch"]
+[ext_resource type="Script" uid="uid://b57ipvfujt6s4" path="res://UI/gear_meter.gd" id="10_grg3l"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v1gob"]
 panorama = ExtResource("1_pbw6q")
@@ -29,6 +32,42 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Arr
 cell_height = 0.1
 agent_height = 2.0
 agent_radius = 1.0
+
+[sub_resource type="Animation" id="Animation_4kpch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gear:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_grg3l"]
+resource_name = "gear_spin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gear:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7),
+"transitions": PackedFloat32Array(1, 2.639016, 1),
+"update": 0,
+"values": [0.0, 6.632251157578453, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_frkhe"]
+_data = {
+&"RESET": SubResource("Animation_4kpch"),
+&"gear_spin": SubResource("Animation_grg3l")
+}
 
 [node name="Main" type="Node3D" unique_id=1558236688]
 
@@ -145,3 +184,54 @@ offset_bottom = 112.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 80
 script = ExtResource("9_vy5pj")
+
+[node name="GearMeter" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=354122767 node_paths=PackedStringArray("animation_player", "gear_label")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -250.0
+offset_right = -70.0
+offset_bottom = 250.0
+grow_horizontal = 0
+grow_vertical = 2
+value = 50.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("10_4kpch")
+script = ExtResource("10_grg3l")
+animation_player = NodePath("AnimationPlayer")
+gear_label = NodePath("Gear/GearLabel")
+
+[node name="Gear" type="TextureRect" parent="UI/CanvasLayer/GearMeter" unique_id=317806062]
+layout_mode = 1
+offset_left = -100.0
+offset_top = 400.0
+offset_right = 100.0
+offset_bottom = 600.0
+pivot_offset = Vector2(100, 100)
+texture = ExtResource("9_bmxlf")
+
+[node name="GearLabel" type="Label" parent="UI/CanvasLayer/GearMeter/Gear" unique_id=1585978236]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 40)
+theme_override_font_sizes/font_size = 50
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CanvasLayer/GearMeter" unique_id=869473838]
+libraries/ = SubResource("AnimationLibrary_frkhe")
