@@ -47,18 +47,6 @@ render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=602173585]
 
-[node name="Floor" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World" unique_id=1945279638]
-transform = Transform3D(10, 0, 0, 0, 0.128, 0, 0, 0, 20, 0, 0, 0)
-use_collision = true
-size = Vector3(8.79541, 17.690247, 10.345215)
-material = ExtResource("1_x00a1")
-
-[node name="Catwalk" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World" unique_id=803015179]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 20, 50, 0, 0)
-use_collision = true
-size = Vector3(1.3649902, 17.690247, 10.345215)
-material = ExtResource("1_x00a1")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/World" unique_id=242327359]
 environment = SubResource("Environment_jhdhk")
 
@@ -68,6 +56,9 @@ environment = SubResource("Environment_jhdhk")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 11.633233, 0)
 spot_range = 35.08089
 spot_angle = 72.64088
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/World/Lighting" unique_id=680303603]
+transform = Transform3D(1, 0, 0, 0, -0.08647967, 0.9962536, 0, -0.9962536, -0.08647967, 0, 0, 0)
 
 [node name="Player" parent="SubViewportContainer/SubViewport/World" unique_id=1972926718 instance=ExtResource("2_x00a1")]
 transform = Transform3D(0.9623565, 0, 0.27179015, 0, 1, 0, -0.27179015, 0, 0.9623565, 0.63244486, 3.736394, -0.85529494)
@@ -79,6 +70,80 @@ navigation_mesh = SubResource("NavigationMesh_bugre")
 [node name="Enviroment" type="Node3D" parent="SubViewportContainer/SubViewport/World/NavigationRegion3D" unique_id=1156915780]
 
 [node name="Props" type="Node3D" parent="SubViewportContainer/SubViewport/World/NavigationRegion3D/Enviroment" unique_id=1504979997]
+
+[node name="Map" type="Node3D" parent="SubViewportContainer/SubViewport/World" unique_id=696249064]
+
+[node name="Walls" type="Node3D" parent="SubViewportContainer/SubViewport/World/Map" unique_id=371894450]
+
+[node name="Wall3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=1219544446]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 10, -34.714, 15, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Wall4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=673339418]
+transform = Transform3D(5, 0, 0, 0, 2, 0, 0, 0, 10, 34.7, 15, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Wall" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=1325463078]
+transform = Transform3D(50, 0, 0, 0, 2, 0, 0, 0, 1, 0, 15, 55)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Wall2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Walls" unique_id=725099399]
+transform = Transform3D(50, 0, 0, 0, 2, 0, 0, 0, 1, 0, 15, -55)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Ground" type="Node3D" parent="SubViewportContainer/SubViewport/World/Map" unique_id=1195122804]
+
+[node name="Catwalk" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=803015179]
+transform = Transform3D(5, 0, 0, 0, 0.5, 0, 0, 0, 10, 29, 0, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Catwalk2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=2127108455]
+transform = Transform3D(5, 0, 0, 0, 0.5, 0, 0, 0, 10, -29, 0, 0)
+use_collision = true
+size = Vector3(1.3649902, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Floor" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=1945279638]
+transform = Transform3D(6, 0, 0, 0, 0.128, 0, 0, 0, 10, 0, 0, 0)
+use_collision = true
+size = Vector3(8.79541, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Floor3" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground/Floor" unique_id=554403951]
+transform = Transform3D(0.30355895, 0, 0, 0, 1, 0, 0, 0, 0.225254, 0, 0.28020513, -3.5067892)
+operation = 2
+use_collision = true
+size = Vector3(8.79541, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Floor4" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground/Floor" unique_id=305481919]
+transform = Transform3D(0.30355895, 0, 0, 0, 1, 0, 0, 0, 0.225254, 0, 0.2802051, -3.5067892)
+operation = 2
+use_collision = true
+size = Vector3(8.79541, 17.690247, 10.345215)
+material = ExtResource("1_x00a1")
+
+[node name="Ramp" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=440001899]
+transform = Transform3D(0.6406353, 0.051063485, 0, -0.2787093, 0.11737342, 0, 0, 0, 7.359097, -5.697479, -1.109005, -35.312733)
+use_collision = true
+size = Vector3(8.624512, 17.690247, 3.3928223)
+material = ExtResource("1_x00a1")
+
+[node name="Ramp2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/World/Map/Ground" unique_id=810115362]
+transform = Transform3D(-0.6406353, -0.051063474, -6.433527e-07, -0.27870926, 0.11737342, 0, 5.600612e-08, 4.4641113e-09, -7.359097, 5.695953, -1.109005, -35.312733)
+use_collision = true
+size = Vector3(8.624512, 17.690247, 3.3928223)
+material = ExtResource("1_x00a1")
 
 [node name="UI" type="Control" parent="." unique_id=1389329484]
 layout_mode = 3
