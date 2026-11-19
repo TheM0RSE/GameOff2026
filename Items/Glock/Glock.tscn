@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://drswxunfysj57"]
 
 [ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="1_4qcjk"]
-[ext_resource type="Script" uid="uid://wuc62gwwoqgx" path="res://Items/Glock/GlockScript.gd" id="1_t77gl"]
+[ext_resource type="Script" uid="uid://wuc62gwwoqgx" path="res://Items/Glock/WeaponScript.gd" id="1_t77gl"]
 [ext_resource type="AudioStream" uid="uid://n41t21edpkgr" path="res://Items/Glock/GlockPow.wav" id="2_t77gl"]
 
 [sub_resource type="Animation" id="Animation_14aeu"]

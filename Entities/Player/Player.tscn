@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("collision", "chest_ray", "head_ray", "top_ray", "ceiling_ray", "camera", "glock") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("collision", "chest_ray", "head_ray", "top_ray", "ceiling_ray", "camera", "weapon") groups=["Player"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 collision_layer = 2
 script = ExtResource("1_3qydi")
@@ -16,7 +16,7 @@ head_ray = NodePath("HeadRay")
 top_ray = NodePath("TopRay")
 ceiling_ray = NodePath("CeilingRay")
 camera = NodePath("Camera3D")
-glock = NodePath("Camera3D/Glock")
+weapon = NodePath("Camera3D/Glock")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2110840047]
 shape = SubResource("CapsuleShape3D_3n5wa")

@@ -1,5 +1,5 @@
 extends Node3D
-class_name Glock
+class_name Weapon
 
 @export var shoot_sfx : AudioStreamPlayer3D
 @export var animation_player : AnimationPlayer

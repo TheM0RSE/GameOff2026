@@ -102,7 +102,7 @@ var mouse_input = Vector2.ZERO
 @export var camera : Camera3D
 var cam_rotation := Vector2.ZERO
 
-@export var glock : Glock
+@export var weapon : Weapon
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # Lock mouse ingame
@@ -121,7 +121,7 @@ func _unhandled_input(event):
 func _process(delta: float) -> void:
 	# If left moues button is pressed, call the shoot fuwdnction in the pistol
 	if Input.is_action_just_pressed("interact"):
-		glock.shoot()
+		weapon.shoot()
 	
 	# Call mouse move function
 	mouse_move()
