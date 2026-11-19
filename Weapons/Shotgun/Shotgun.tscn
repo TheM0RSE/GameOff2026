@@ -2,9 +2,56 @@
 
 [ext_resource type="Script" uid="uid://wuc62gwwoqgx" path="res://Weapons/WeaponScript.gd" id="1_axhlk"]
 [ext_resource type="PackedScene" uid="uid://c8ijcnl55st62" path="res://Weapons/Shotgun/Shotgun.glb" id="1_tqfqr"]
+[ext_resource type="AudioStream" uid="uid://n41t21edpkgr" path="res://Weapons/Glock/GlockPow.wav" id="3_x3vbk"]
 
-[node name="Shotgun" type="Node3D" unique_id=1486719328]
+[sub_resource type="Animation" id="Animation_x3vbk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3ycso"]
+resource_name = "Shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 1),
+"transitions": PackedFloat32Array(0.21763788, 1.4640859, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.5707964), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w68gx"]
+_data = {
+&"RESET": SubResource("Animation_x3vbk"),
+&"Shoot": SubResource("Animation_3ycso")
+}
+
+[node name="Shotgun" type="Node3D" unique_id=1486719328 node_paths=PackedStringArray("shoot_sfx", "animation_player")]
 script = ExtResource("1_axhlk")
+shoot_sfx = NodePath("ShootSFX")
+animation_player = NodePath("AnimationPlayer")
+damage = 40
+shoot_rate = 1.0
 
 [node name="Model" parent="." unique_id=1291959369 instance=ExtResource("1_tqfqr")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+transform = Transform3D(0.14999999, 0, 0, 0, 0.14999999, 0, 0, 0, 0.14999999, 0, 0, 0)
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=1418159826]
+stream = ExtResource("3_x3vbk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1665587856]
+libraries/ = SubResource("AnimationLibrary_w68gx")

@@ -40,11 +40,13 @@ func shoot():
 		get_tree().current_scene.add_child(box)
 		# TESTING
 	
-	shoot_rate_timer = 0.2
-	shoot_sfx.stop()
-	shoot_sfx.play()
-	animation_player.stop()
-	animation_player.play("Glock_Shoot")
+	shoot_rate_timer = shoot_rate
+	if shoot_sfx:
+		shoot_sfx.stop()
+		shoot_sfx.play()
+	if animation_player:
+		animation_player.stop()
+		animation_player.play("Shoot")
 
 func _process(delta):
 	shoot_rate_timer -= delta

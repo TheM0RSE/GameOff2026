@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c2f7or57sbcfm"]
 
 [ext_resource type="Script" uid="uid://c143gwe7hw56k" path="res://Entities/Player/Player.gd" id="1_3qydi"]
-[ext_resource type="PackedScene" uid="uid://drswxunfysj57" path="res://Weapons/Glock/Glock.tscn" id="2_vweq0"]
+[ext_resource type="PackedScene" uid="uid://drg4t4p1a5vab" path="res://Weapons/Shotgun/Shotgun.tscn" id="3_1des2"]
 [ext_resource type="Texture2D" uid="uid://q84dn3aohufv" path="res://Entities/Player/Crosshair.png" id="3_vweq0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
@@ -17,7 +17,7 @@ top_ray = NodePath("TopRay")
 ceiling_ray = NodePath("CeilingRay")
 camera = NodePath("Camera3D")
 weapon_point = NodePath("Camera3D/WeaponPoint")
-weapon_scene = ExtResource("2_vweq0")
+weapon_scene = ExtResource("3_1des2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2110840047]
 shape = SubResource("CapsuleShape3D_3n5wa")
