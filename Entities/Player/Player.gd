@@ -102,7 +102,9 @@ var mouse_input = Vector2.ZERO
 @export var camera : Camera3D
 var cam_rotation := Vector2.ZERO
 
-@export var weapon : Weapon
+@export var weapon_point : Node3D
+@export var weapon_scene : PackedScene
+@export var current_weapon : Weapon
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # Lock mouse ingame
@@ -113,6 +115,13 @@ func _ready() -> void:
 	base_fov = camera.fov
 	cam_offset = stand_cam_y
 	
+	if weapon_scene:
+		var new_weapon = weapon_scene.instantiate()
+		if new_weapon is Weapon:
+			current_weapon = new_weapon
+			new_weapon.camera = camera
+		weapon_point.add_child(current_weapon)
+	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		# Collect mouse input data
@@ -121,7 +130,7 @@ func _unhandled_input(event):
 func _process(delta: float) -> void:
 	# If left moues button is pressed, call the shoot fuwdnction in the pistol
 	if Input.is_action_just_pressed("interact"):
-		weapon.shoot()
+		current_weapon.shoot()
 	
 	# Call mouse move function
 	mouse_move()

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://drswxunfysj57"]
 
-[ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Items/Glock/Glock.glb" id="1_4qcjk"]
-[ext_resource type="Script" uid="uid://wuc62gwwoqgx" path="res://Items/Glock/WeaponScript.gd" id="1_t77gl"]
-[ext_resource type="AudioStream" uid="uid://n41t21edpkgr" path="res://Items/Glock/GlockPow.wav" id="2_t77gl"]
+[ext_resource type="Script" uid="uid://wuc62gwwoqgx" path="res://Weapons/WeaponScript.gd" id="1_wdrh0"]
+[ext_resource type="PackedScene" uid="uid://bpo2s2glog4gk" path="res://Weapons/Glock/Glock.glb" id="2_egyqe"]
+[ext_resource type="AudioStream" uid="uid://n41t21edpkgr" path="res://Weapons/Glock/GlockPow.wav" id="3_mdspr"]
 
 [sub_resource type="Animation" id="Animation_14aeu"]
 resource_name = "Glock_Shoot"
@@ -41,15 +41,15 @@ _data = {
 }
 
 [node name="Glock" type="Node3D" unique_id=1205406264 node_paths=PackedStringArray("shoot_sfx", "animation_player")]
-script = ExtResource("1_t77gl")
+script = ExtResource("1_wdrh0")
 shoot_sfx = NodePath("ShootSFX")
 animation_player = NodePath("AnimationPlayer")
 
-[node name="Model" parent="." unique_id=465695505 instance=ExtResource("1_4qcjk")]
+[node name="Model" parent="." unique_id=465695505 instance=ExtResource("2_egyqe")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=367553852]
-stream = ExtResource("2_t77gl")
+stream = ExtResource("3_mdspr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2087245508]
 libraries/ = SubResource("AnimationLibrary_pxitb")

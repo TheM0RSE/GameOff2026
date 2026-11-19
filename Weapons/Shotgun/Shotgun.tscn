@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drg4t4p1a5vab"]
+
+[ext_resource type="Script" uid="uid://wuc62gwwoqgx" path="res://Weapons/WeaponScript.gd" id="1_axhlk"]
+[ext_resource type="PackedScene" uid="uid://c8ijcnl55st62" path="res://Weapons/Shotgun/Shotgun.glb" id="1_tqfqr"]
+
+[node name="Shotgun" type="Node3D" unique_id=1486719328]
+script = ExtResource("1_axhlk")
+
+[node name="Model" parent="." unique_id=1291959369 instance=ExtResource("1_tqfqr")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)

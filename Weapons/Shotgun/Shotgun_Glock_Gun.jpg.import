@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgosnm2ib1t5"
-path.s3tc="res://.godot/imported/ShotgunTexture.jpg-d6c935ee382957600319956ad8de503c.s3tc.ctex"
+uid="uid://c6okvcx6uwaof"
+path.s3tc="res://.godot/imported/Shotgun_Glock_Gun.jpg-3ae75ed0c4f5c6f33438f3b1e3e6332a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Items/Shotgun/ShotgunTexture.jpg"
-dest_files=["res://.godot/imported/ShotgunTexture.jpg-d6c935ee382957600319956ad8de503c.s3tc.ctex"]
+source_file="res://Weapons/Shotgun/Shotgun_Glock_Gun.jpg"
+dest_files=["res://.godot/imported/Shotgun_Glock_Gun.jpg-3ae75ed0c4f5c6f33438f3b1e3e6332a.s3tc.ctex"]
 
 [params]
 
