@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drllyqb8qymfb"
-path.s3tc="res://.godot/imported/Glock_Gun.jpg-25e369771a9af6400885f37304e575ff.s3tc.ctex"
+uid="uid://c6okvcx6uwaof"
+path.s3tc="res://.godot/imported/Shotgun_Glock_Gun.jpg-3ae75ed0c4f5c6f33438f3b1e3e6332a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "c426b77f42599408b7c44d9c4e9e45f1"
+"md5": "07fe43e0e071537673b96e7df1d82698"
 }
 
 [deps]
 
-source_file="res://Items/Glock/Glock_Gun.jpg"
-dest_files=["res://.godot/imported/Glock_Gun.jpg-25e369771a9af6400885f37304e575ff.s3tc.ctex"]
+source_file="res://Weapons/Shotgun/Shotgun_Glock_Gun.jpg"
+dest_files=["res://.godot/imported/Shotgun_Glock_Gun.jpg-3ae75ed0c4f5c6f33438f3b1e3e6332a.s3tc.ctex"]
 
 [params]
 

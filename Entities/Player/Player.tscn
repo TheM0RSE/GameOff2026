@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://c2f7or57sbcfm"]
 
 [ext_resource type="Script" uid="uid://c143gwe7hw56k" path="res://Entities/Player/Player.gd" id="1_3qydi"]
-[ext_resource type="PackedScene" uid="uid://drswxunfysj57" path="res://Items/Glock/Glock.tscn" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://drg4t4p1a5vab" path="res://Weapons/Shotgun/Shotgun.tscn" id="3_1des2"]
 [ext_resource type="Texture2D" uid="uid://q84dn3aohufv" path="res://Entities/Player/Crosshair.png" id="3_vweq0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3n5wa"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("collision", "chest_ray", "head_ray", "top_ray", "ceiling_ray", "camera", "glock") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1972926718 node_paths=PackedStringArray("collision", "chest_ray", "head_ray", "top_ray", "ceiling_ray", "camera", "weapon_point") groups=["Player"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 collision_layer = 2
 script = ExtResource("1_3qydi")
@@ -16,7 +16,8 @@ head_ray = NodePath("HeadRay")
 top_ray = NodePath("TopRay")
 ceiling_ray = NodePath("CeilingRay")
 camera = NodePath("Camera3D")
-glock = NodePath("Camera3D/Glock")
+weapon_point = NodePath("Camera3D/WeaponPoint")
+weapon_scene = ExtResource("3_1des2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2110840047]
 shape = SubResource("CapsuleShape3D_3n5wa")
@@ -26,9 +27,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49968207, 0)
 current = true
 fov = 80.0
 
-[node name="Glock" parent="Camera3D" unique_id=1205406264 node_paths=PackedStringArray("camera") instance=ExtResource("2_ww0jn")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.6, -0.4, -0.7)
-camera = NodePath("..")
+[node name="WeaponPoint" type="Node3D" parent="Camera3D" unique_id=1221922900]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.8, -0.5, -1)
 
 [node name="Crosshair" type="Control" parent="." unique_id=465566926]
 layout_mode = 3
