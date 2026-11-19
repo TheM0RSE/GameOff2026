@@ -104,7 +104,7 @@ var cam_rotation := Vector2.ZERO
 
 @export var weapon_point : Node3D
 @export var weapon_scene : PackedScene
-@export var current_weapon : Weapon
+var current_weapon : Weapon
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # Lock mouse ingame
