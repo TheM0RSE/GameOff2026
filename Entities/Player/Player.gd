@@ -212,16 +212,13 @@ func update_height(delta):
 	camera.position.y = cam_smooth_y - global_position.y
 	
 func mouse_move():
-	# Apply rotation on every rendered framed
 	rotate_y(-mouse_input.x * mouse_sensitivity)
-	camera.rotate_x(-mouse_input.y * mouse_sensitivity)
-	
-	# Clamp vertical camera angle so you can't look upside down
-	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
-	
+
+	cam_rotation.x -= mouse_input.y * mouse_sensitivity
+	cam_rotation.x = clamp(cam_rotation.x, deg_to_rad(-89), deg_to_rad(89))
+	camera.rotation.x = cam_rotation.x
+
 	mouse_turn += mouse_input.x
-	
-	# Clear the accumulated input so it doesn't carry over to the next frame
 	mouse_input = Vector2.ZERO
 	
 func dash_and_move(delta):
