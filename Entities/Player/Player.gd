@@ -120,6 +120,7 @@ func _ready() -> void:
 		if new_weapon is Weapon:
 			current_weapon = new_weapon
 			new_weapon.camera = camera
+			new_weapon.player = self
 		weapon_point.add_child(current_weapon)
 	
 func _unhandled_input(event):
