@@ -13,9 +13,9 @@ var alive: bool = true
 func _ready():
 	current_health = max_health
 	
-func take_damage(amount):
+func take_damage(amount) -> int:
 	if not alive or amount <= 0: # Do nothing if entity is dead or if there is no damage
-		return
+		return 0
 	var actual_damage = clampi(amount, 0, current_health) # Do no more damage if it is more than the current health
 	current_health = clampi(current_health - actual_damage, 0, max_health) # Take off the damage from the current health
 	damage_taken.emit(actual_damage)
@@ -24,3 +24,5 @@ func take_damage(amount):
 	if current_health <= 0:
 		alive = false
 		died.emit()
+	
+	return actual_damage

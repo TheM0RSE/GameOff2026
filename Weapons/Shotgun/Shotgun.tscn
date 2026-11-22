@@ -46,7 +46,7 @@ shoot_sfx = NodePath("ShootSFX")
 animation_player = NodePath("AnimationPlayer")
 damage = 40
 shoot_rate = 1.0
-recoil_force = 20
+recoil_force = 10
 
 [node name="Model" parent="." unique_id=1291959369 instance=ExtResource("1_tqfqr")]
 transform = Transform3D(0.14999999, 0, 0, 0, 0.14999999, 0, 0, 0, 0.14999999, 0, 0, 0)

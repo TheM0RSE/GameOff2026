@@ -47,15 +47,19 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
-func take_damage(collider: Area3D, damage: int):
+func take_damage(collider: Area3D, damage: int) -> int:
 	if not health_component:
-		return
+		return 0
 	if collider == head_collider:
-		health_component.take_damage(damage * headshot_multiplier) # Multiply with headshot_multiplier if weapon hits head
+		var headshot_damage = damage * headshot_multiplier # Multiply with headshot_multiplier if weapon hits head
+		var actual_damage = health_component.take_damage(headshot_damage)
+		return actual_damage
 	elif collider == body_collider:
-		health_component.take_damage(damage)
+		var actual_damage = health_component.take_damage(damage)
+		return actual_damage
 	else:
 		print("Not a body or head collider?")
+	return 0
 
 func _on_health_component_health_changed(current_health: int): # What happens when the enemy's health changes?
 	if not health_bar:

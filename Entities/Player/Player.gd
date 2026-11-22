@@ -102,9 +102,13 @@ var mouse_input = Vector2.ZERO
 @export var camera : Camera3D
 var cam_rotation := Vector2.ZERO
 
+# Weapon variables
 @export var weapon_point : Node3D
 @export var weapon_scene : PackedScene
 var current_weapon : Weapon
+
+# Gear meter
+@export var gear_meter : TextureProgressBar
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # Lock mouse ingame
@@ -394,3 +398,9 @@ func update_camera_fx(delta):
 	camera.h_offset = randf_range(-s, s)
 	camera.v_offset = randf_range(-s, s)
 	shake = move_toward(shake, 0.0, 0.8 * delta)
+
+func update_gear_meter(damage: int):
+	if gear_meter:
+		gear_meter.add_value(damage)
+	else:
+		print("No gear meter defined")

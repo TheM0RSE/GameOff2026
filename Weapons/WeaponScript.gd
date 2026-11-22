@@ -33,7 +33,9 @@ func shoot():
 		
 		var hit = collision["collider"]
 		if hit.owner.has_method("take_damage"):
-			hit.owner.take_damage(hit, damage)
+			var damage = hit.owner.take_damage(hit, damage)
+			if player.has_method("update_gear_meter"):
+				player.update_gear_meter(damage)
 		
 		
 		# TESTING (CREATES BOX WHERE MOUSE IS POINTED)
