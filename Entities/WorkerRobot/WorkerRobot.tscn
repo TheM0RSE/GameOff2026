@@ -860,6 +860,7 @@ viewport_path = NodePath("Healthbar/SubViewport")
 
 [node name="Customer" type="CharacterBody3D" unique_id=1439125245 node_paths=PackedStringArray("health_component", "health_bar", "head_collider", "body_collider")]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_5ftmo")
 health_component = NodePath("HealthComponent")
 health_bar = NodePath("Healthbar/SubViewport/ProgressBar")

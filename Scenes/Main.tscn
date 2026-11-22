@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bic3k18q2t0ui" path="res://Models/Table/Table.glb" id="4_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://dulq0ckibflvo" path="res://Entities/WorkerRobot/WorkerRobot.tscn" id="7_50glp"]
 [ext_resource type="PackedScene" uid="uid://x8lmalqrs4c6" path="res://Entities/HipHopDancer/hip_hop_dancing.tscn" id="7_jw32o"]
+[ext_resource type="Texture2D" uid="uid://b4y6dqq4q3pvo" path="res://UI/GearMeter/GearMeterEmpty.png" id="8_4kpch"]
 [ext_resource type="Texture2D" uid="uid://natl2uxltb2c" path="res://UI/GearMeter/Gear.png" id="9_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://cf6uolvwtrmqp" path="res://UI/GearMeter/GearMeterFilled.png" id="9_grg3l"]
 [ext_resource type="Script" uid="uid://b7j8oinw4ygei" path="res://Scenes/fps.gd" id="9_vy5pj"]
-[ext_resource type="Texture2D" uid="uid://df0kuen0jgi5y" path="res://UI/GearMeter/GearMeterBorder.png" id="10_4kpch"]
 [ext_resource type="Script" uid="uid://b57ipvfujt6s4" path="res://UI/gear_meter.gd" id="10_grg3l"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v1gob"]
@@ -109,8 +110,9 @@ spot_angle = 48.258846
 transform = Transform3D(-0.62728643, 0.23172829, -0.74351454, -0.13602789, 0.9074293, 0.39757875, 0.76681685, 0.3505344, -0.5376965, 0, 6.527805, 0)
 shadow_enabled = true
 
-[node name="Player" parent="SubViewportContainer/SubViewport/World" unique_id=1972926718 instance=ExtResource("1_r150o")]
+[node name="Player" parent="SubViewportContainer/SubViewport/World" unique_id=1972926718 node_paths=PackedStringArray("gear_meter") instance=ExtResource("1_r150o")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.962905, 1.6657808, -2.8684998)
+gear_meter = NodePath("../../../../UI/CanvasLayer/GearMeter")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport/World" unique_id=1232932362]
 navigation_mesh = SubResource("NavigationMesh_3n5wa")
@@ -162,6 +164,54 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.394899, 0.49489495, 3.121523)
 player = NodePath("../Player")
 
+[node name="Customer2" parent="SubViewportContainer/SubViewport/World" unique_id=713210261 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.931631, 0.49489495, 17.328062)
+player = NodePath("../Player")
+
+[node name="Customer3" parent="SubViewportContainer/SubViewport/World" unique_id=1073123583 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.931631, 0.49489495, -4.432789)
+player = NodePath("../Player")
+
+[node name="Customer4" parent="SubViewportContainer/SubViewport/World" unique_id=874462086 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.238817, 1.2951488, -4.432789)
+player = NodePath("../Player")
+
+[node name="Customer5" parent="SubViewportContainer/SubViewport/World" unique_id=1530850045 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0985107, 1.8310652, -4.432789)
+player = NodePath("../Player")
+
+[node name="Customer6" parent="SubViewportContainer/SubViewport/World" unique_id=1921109935 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.063168, 0.84902, -4.432789)
+player = NodePath("../Player")
+
+[node name="Customer7" parent="SubViewportContainer/SubViewport/World" unique_id=1835931927 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.566284, 2.220398, -4.432788)
+player = NodePath("../Player")
+
+[node name="Customer8" parent="SubViewportContainer/SubViewport/World" unique_id=1805946324 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.566284, 2.220398, 14.287137)
+player = NodePath("../Player")
+
+[node name="Customer9" parent="SubViewportContainer/SubViewport/World" unique_id=110938319 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3714561, 2.220398, 12.000733)
+player = NodePath("../Player")
+
+[node name="Customer10" parent="SubViewportContainer/SubViewport/World" unique_id=106452170 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.51251, 6.6616096, 12.000733)
+player = NodePath("../Player")
+
+[node name="Customer11" parent="SubViewportContainer/SubViewport/World" unique_id=2124593261 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.271372, 2.6284318, 12.000733)
+player = NodePath("../Player")
+
+[node name="Customer12" parent="SubViewportContainer/SubViewport/World" unique_id=1902407957 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2873363, 2.6284308, -20.891724)
+player = NodePath("../Player")
+
+[node name="Customer13" parent="SubViewportContainer/SubViewport/World" unique_id=984011035 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2873363, 2.6946015, -26.005444)
+player = NodePath("../Player")
+
 [node name="UI" type="Control" parent="." unique_id=549994049]
 layout_mode = 3
 anchors_preset = 0
@@ -192,10 +242,10 @@ offset_right = -70.0
 offset_bottom = 250.0
 grow_horizontal = 0
 grow_vertical = 2
-value = 50.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_under = ExtResource("10_4kpch")
+texture_under = ExtResource("8_4kpch")
+texture_progress = ExtResource("9_grg3l")
 script = ExtResource("10_grg3l")
 animation_player = NodePath("AnimationPlayer")
 gear_label = NodePath("Gear/GearLabel")

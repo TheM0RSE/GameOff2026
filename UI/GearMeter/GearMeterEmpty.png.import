@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df0kuen0jgi5y"
-path="res://.godot/imported/GearMeterBorder.png-8f4a6404f5da2de828f8b223ecf30fa6.ctex"
+uid="uid://b4y6dqq4q3pvo"
+path="res://.godot/imported/GearMeterEmpty.png-5f2b7222822dba19ae4c44c7efb69c6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/GearMeter/GearMeterBorder.png"
-dest_files=["res://.godot/imported/GearMeterBorder.png-8f4a6404f5da2de828f8b223ecf30fa6.ctex"]
+source_file="res://UI/GearMeter/GearMeterEmpty.png"
+dest_files=["res://.godot/imported/GearMeterEmpty.png-5f2b7222822dba19ae4c44c7efb69c6c.ctex"]
 
 [params]
 
