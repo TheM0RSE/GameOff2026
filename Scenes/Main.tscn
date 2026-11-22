@@ -173,7 +173,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.931631, 0.49489495, -4.43
 player = NodePath("../Player")
 
 [node name="Customer4" parent="SubViewportContainer/SubViewport/World" unique_id=874462086 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.238817, 4.58837, -4.432789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.238817, 1.2951488, -4.432789)
+player = NodePath("../Player")
+
+[node name="Customer5" parent="SubViewportContainer/SubViewport/World" unique_id=1530850045 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0985107, 1.8310652, -4.432789)
+player = NodePath("../Player")
+
+[node name="Customer6" parent="SubViewportContainer/SubViewport/World" unique_id=1921109935 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.063168, 0.84902, -4.432789)
+player = NodePath("../Player")
+
+[node name="Customer7" parent="SubViewportContainer/SubViewport/World" unique_id=1835931927 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.566284, 2.220398, -4.432788)
+player = NodePath("../Player")
+
+[node name="Customer8" parent="SubViewportContainer/SubViewport/World" unique_id=1805946324 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.566284, 2.220398, 14.287137)
+player = NodePath("../Player")
+
+[node name="Customer9" parent="SubViewportContainer/SubViewport/World" unique_id=110938319 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3714561, 2.220398, 12.000733)
+player = NodePath("../Player")
+
+[node name="Customer10" parent="SubViewportContainer/SubViewport/World" unique_id=106452170 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.51251, 6.6616096, 12.000733)
+player = NodePath("../Player")
+
+[node name="Customer11" parent="SubViewportContainer/SubViewport/World" unique_id=2124593261 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.271372, 2.6284318, 12.000733)
+player = NodePath("../Player")
+
+[node name="Customer12" parent="SubViewportContainer/SubViewport/World" unique_id=1902407957 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2873363, 2.6284308, -20.891724)
+player = NodePath("../Player")
+
+[node name="Customer13" parent="SubViewportContainer/SubViewport/World" unique_id=984011035 node_paths=PackedStringArray("player") instance=ExtResource("7_50glp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2873363, 2.6946015, -26.005444)
 player = NodePath("../Player")
 
 [node name="UI" type="Control" parent="." unique_id=549994049]
