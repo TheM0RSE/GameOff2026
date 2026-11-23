@@ -10,6 +10,7 @@ enum GearState { # Divide damage by incrementing number to make it harder to gea
 
 @export var animation_player: AnimationPlayer
 @export var gear_label: Label
+@export var gear_sfx: AudioStreamPlayer
 
 const max_gear: int = 5
 var current_gear: GearState = GearState.ONE
@@ -74,6 +75,9 @@ func gear(gear_down: bool = false):
 	animation_player.stop()
 	animation_player.play("gear_spin")
 	gear_label.text = str(next_index + 1)
+	if gear_sfx:
+		gear_sfx.stop()
+		gear_sfx.play()
 	if current_gear == GearState.FIVE:
 		self.value = 100
 	

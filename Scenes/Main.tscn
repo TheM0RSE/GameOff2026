@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cf6uolvwtrmqp" path="res://UI/GearMeter/GearMeterFilled.png" id="9_grg3l"]
 [ext_resource type="Script" uid="uid://b7j8oinw4ygei" path="res://Scenes/fps.gd" id="9_vy5pj"]
 [ext_resource type="Script" uid="uid://b57ipvfujt6s4" path="res://UI/gear_meter.gd" id="10_grg3l"]
+[ext_resource type="AudioStream" uid="uid://ctpg4tthmllcw" path="res://UI/GearMeter/GearSFX.wav" id="12_grg3l"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v1gob"]
 panorama = ExtResource("1_pbw6q")
@@ -230,7 +231,7 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 80
 script = ExtResource("9_vy5pj")
 
-[node name="GearMeter" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=354122767 node_paths=PackedStringArray("animation_player", "gear_label")]
+[node name="GearMeter" type="TextureProgressBar" parent="UI/CanvasLayer" unique_id=354122767 node_paths=PackedStringArray("animation_player", "gear_label", "gear_sfx")]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -250,6 +251,7 @@ texture_progress_offset = Vector2(0, 1)
 script = ExtResource("10_grg3l")
 animation_player = NodePath("AnimationPlayer")
 gear_label = NodePath("Gear/GearLabel")
+gear_sfx = NodePath("GearSFX")
 
 [node name="Gear" type="TextureRect" parent="UI/CanvasLayer/GearMeter" unique_id=317806062]
 layout_mode = 1
@@ -287,3 +289,7 @@ vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CanvasLayer/GearMeter" unique_id=869473838]
 libraries/ = SubResource("AnimationLibrary_frkhe")
+
+[node name="GearSFX" type="AudioStreamPlayer" parent="UI/CanvasLayer/GearMeter" unique_id=1860250645]
+stream = ExtResource("12_grg3l")
+volume_db = -10.0
